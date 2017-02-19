@@ -1,12 +1,13 @@
 import * as PIXI from "pixi.js"
+import Ship from "./entities/ship"
 
 class Game {
   run() {
-    let app = new PIXI.Application(800, 600)
-    document.body.appendChild(app.view)
+    this.app = new PIXI.Application(800, 600)
+    document.body.appendChild(this.app.view)
 
-    let hmans = PIXI.Sprite.fromImage('/img/hmans.jpg')
-    app.stage.addChild(hmans)
+    let ship = new Ship()
+    this.app.stage.addChild(ship)
   }
 }
 
