@@ -15,7 +15,13 @@ class GameScene extends Scene {
   }
 
   update(delta) {
+    this.handleInput()
     this.camera.lookAt(this.ship.position)
+  }
+
+  handleInput() {
+    if (key.isPressed("A") || key.isPressed("left"))
+      this.ship.rotation -= 0.01
   }
 }
 
