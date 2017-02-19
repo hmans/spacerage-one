@@ -1,6 +1,6 @@
 Ship = require "../entities/ship"
 
-class GameScene
+module.exports = class GameScene
   constructor: ->
     @ship = new Ship
 
@@ -9,6 +9,3 @@ class GameScene
 
 
   update: (delta) ->
-
-
-module.exports = GameScene
