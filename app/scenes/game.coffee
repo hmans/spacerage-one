@@ -1,9 +1,11 @@
+Ship = require "../entities/ship"
+
 class GameScene
   constructor: ->
+    @ship = new Ship
 
   init: ->
-    @ship = PIXI.Sprite.fromImage "/img/ship.png"
-    app.stage.addChild @ship
+    app.stage.addChild @ship.sprite
 
 
   update: (delta) ->
