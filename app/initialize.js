@@ -1,4 +1,6 @@
+import Game from "game"
+
 document.addEventListener('DOMContentLoaded', () => {
-  // do your setup here
-  console.log('Initialized app');
+  let game = new Game()
+  game.run()
 });
