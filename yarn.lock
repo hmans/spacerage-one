@@ -393,6 +393,10 @@ coffee-script-brunch@^2.10.1:
   dependencies:
     coffee-script "~1.11.0"
 
+coffee-script@^1.12.4:
+  version "1.12.4"
+  resolved "https://registry.yarnpkg.com/coffee-script/-/coffee-script-1.12.4.tgz#fe1bced97fe1fb3927b998f2b45616e0658be1ff"
+
 coffee-script@~1.11, coffee-script@~1.11.0:
   version "1.11.1"
   resolved "https://registry.yarnpkg.com/coffee-script/-/coffee-script-1.11.1.tgz#bf1c47ad64443a0d95d12df2b147cc0a4daad6e9"
