@@ -7,10 +7,11 @@ class Game {
     this.app = new PIXI.Application(800, 600)
     document.body.appendChild(this.app.view)
 
-    // let ship = new Ship()
-    // this.app.stage.addChild(ship)
+    this.startScene(new GameScene(this))
+  }
 
-    let scene = new GameScene
+  startScene(scene) {
+    this.scene = scene
     this.app.stage.addChild(scene.stage)
   }
 }
