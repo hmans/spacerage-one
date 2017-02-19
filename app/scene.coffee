@@ -1,0 +1,5 @@
+Scene = ->
+
+
+
+module.exports = Scene
