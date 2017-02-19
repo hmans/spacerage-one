@@ -5,4 +5,6 @@ export default class Scene {
     this.stage = new Container
     this.game = game
   }
+
+  update(delta) { }
 }

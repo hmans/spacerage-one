@@ -8,11 +8,19 @@ class Game {
     document.body.appendChild(this.app.view)
 
     this.startScene(new GameScene(this))
+
+    this.app.ticker.add((delta) => {
+      this.update(delta)
+    })
   }
 
   startScene(scene) {
     this.scene = scene
     this.app.stage.addChild(scene.stage)
+  }
+
+  update(delta) {
+    this.scene.update(delta)
   }
 }
 

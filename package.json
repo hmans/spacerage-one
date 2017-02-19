@@ -10,6 +10,7 @@
     "build": "brunch build --production"
   },
   "dependencies": {
+    "keymaster": "^1.6.2",
     "pixi.js": "^4.3.5"
   },
   "devDependencies": {
