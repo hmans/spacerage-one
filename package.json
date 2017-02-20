@@ -7,7 +7,8 @@
   "repository": "",
   "scripts": {
     "start": "brunch watch --server",
-    "build": "brunch build --production"
+    "build": "brunch build --production",
+    "deploy": "rsync -vr --del public/* sunder:/var/www/spacerage/"
   },
   "dependencies": {
     "coffee-script": "^1.12.4",
