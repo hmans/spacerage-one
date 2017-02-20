@@ -5,6 +5,9 @@ module.exports = class Ship extends PIXI.Sprite
     @texture = PIXI.Texture.fromImage "/img/ship.png"
     super(@texture)
 
+    # fix scale
+    @scale.set(0.8)
+
     # set up velocity (could be a component?)
     @velocity = new Vec2
     @angularVelocity = 0
