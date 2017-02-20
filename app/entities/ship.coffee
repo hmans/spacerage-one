@@ -1,3 +1,4 @@
-module.exports = class Ship
+module.exports = class Ship extends PIXI.Sprite
   constructor: ->
-    @sprite = PIXI.Sprite.fromImage "/img/ship.png"
+    @texture = PIXI.Texture.fromImage "/img/ship.png"
+    super(@texture)

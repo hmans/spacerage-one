@@ -1,11 +1,9 @@
 Ship = require "../entities/ship"
 
-module.exports = class GameScene
+module.exports = class GameScene extends PIXI.Container
   constructor: ->
+    super()
     @ship = new Ship
-
-  init: ->
-    app.stage.addChild @ship.sprite
-
+    @addChild @ship
 
   update: (delta) ->

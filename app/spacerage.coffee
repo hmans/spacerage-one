@@ -9,5 +9,16 @@ module.exports = SpaceRage =
     document.body.appendChild app.view
     window.app = app
 
-    s = new GameScene()
-    s.init()
+    @startScene(new GameScene())
+
+    app.ticker.add @update.bind(this)
+
+  startScene: (scene) ->
+    if @scene
+      app.stage.removeChild(@scene)
+
+    @scene = scene
+    app.stage.addChild(@scene)
+
+  update: (delta) ->
+    @scene.update(delta)
