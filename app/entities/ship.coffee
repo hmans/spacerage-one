@@ -9,8 +9,12 @@ module.exports = class Ship extends PIXI.Sprite
     app.ticker.add @updateVelocity
 
   updateVelocity: (delta) =>
+    # Apply velocity to our position
     @x += @velocity.x / delta
     @y += @velocity.y / delta
+
+    # Apply friction to velocity
+    @velocity = @velocity.scale(0.95 / delta)
 
   accelerate: (vec) ->
     @velocity = @velocity.add(vec)
