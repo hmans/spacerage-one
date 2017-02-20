@@ -1,6 +1,7 @@
 Camera = require "../camera"
 Vec2 = require "../vec2"
 Ship = require "../entities/ship"
+Background = require "../entities/background"
 
 require "keymaster"
 
@@ -8,18 +9,28 @@ module.exports = class GameScene extends PIXI.Container
   constructor: ->
     super()
 
+    # set up world
     @world = new PIXI.Container
     @addChild @world
 
+    # set up camera
     @camera = new Camera(@world)
 
+    # set up ship
     @ship = new Ship
     @ship.anchor.set 0.5
+
+    # set up background
+    @background = new Background(@ship)
+
+    # Add entities to our world stage
+    @world.addChild @background
     @world.addChild @ship
+
 
   update: (delta) ->
     @handleInput(delta)
-    @camera.lookAt({x: 0, y:0})
+    @camera.lookAt(@ship)
 
   handleInput: (delta) ->
     if (key.isPressed("W") || key.isPressed("up"))

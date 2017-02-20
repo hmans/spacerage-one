@@ -9,9 +9,13 @@ module.exports = SpaceRage =
     document.body.appendChild app.view
     window.app = app
 
-    @startScene(new GameScene())
-
-    app.ticker.add @update.bind(this)
+    # load assets
+    loader = PIXI.loader
+    loader.add "ship", "/img/ship.png"
+    loader.add "background", "/img/space.jpg"
+    loader.load =>
+      @startScene(new GameScene())
+      app.ticker.add @update.bind(this)
 
   startScene: (scene) ->
     if @scene
