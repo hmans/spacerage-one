@@ -1,38 +1,46 @@
 Vec2 = require "../vec2"
 
+class Velocity
+  @bless: (obj) ->
+    obj.velocity = new Vec2
+    obj.angularVelocity = 0
+
+    obj.accelerate = (vec) ->
+      @velocity = @velocity.add(vec)
+
+    obj.accelerateRotation = (n) ->
+      @angularVelocity += n
+
+    obj.updateVelocity = (delta) ->
+      # Apply velocity to our position
+      @x += @velocity.x / delta
+      @y += @velocity.y / delta
+
+      # Apply drag to velocity
+      @velocity = @velocity.scale(0.95 / delta)
+
+      # Apply angular velocity to our rotation
+      @rotation += @angularVelocity / delta
+
+      # Apply drag to angular velocity
+      @angularVelocity *= 0.95 / delta
+
+    # set up velocity (could be a component?)
+    app.ticker.add obj.updateVelocity.bind(obj)
+
+
+class StupidSkewTrick
+  @bless: (obj) ->
+    app.ticker.add ->
+      obj.skew.set(obj.angularVelocity / 2.5)
+
+
+
 module.exports = class Ship extends PIXI.Sprite
   constructor: ->
     @texture = PIXI.Texture.fromImage "/img/ship.png"
     super(@texture)
-
-    # fix scale
     @scale.set(0.8)
 
-    # set up velocity (could be a component?)
-    @velocity = new Vec2
-    @angularVelocity = 0
-    app.ticker.add @updateVelocity
-
-    # EXPERIMENTAL: skew image according to rotation
-    app.ticker.add =>
-      @skew.set(@angularVelocity / 2.5)
-
-  updateVelocity: (delta) =>
-    # Apply velocity to our position
-    @x += @velocity.x / delta
-    @y += @velocity.y / delta
-
-    # Apply drag to velocity
-    @velocity = @velocity.scale(0.95 / delta)
-
-    # Apply angular velocity to our rotation
-    @rotation += @angularVelocity / delta
-
-    # Apply drag to angular velocity
-    @angularVelocity *= 0.95 / delta
-
-  accelerate: (vec) ->
-    @velocity = @velocity.add(vec)
-
-  accelerateRotation: (n) ->
-    @angularVelocity += n
+    Velocity.bless(@)
+    StupidSkewTrick.bless(@)
