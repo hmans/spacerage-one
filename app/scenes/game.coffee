@@ -1,7 +1,12 @@
 Camera = require "../camera"
 Vec2 = require "../vec2"
-Ship = require "../entities/ship"
 Background = require "../entities/background"
+Velocity = require "../components/velocity"
+
+class StupidSkewTrick
+  @bless: (obj) ->
+    app.ticker.add ->
+      obj.skew.set(obj.angularVelocity / 3)
 
 require "keymaster"
 
@@ -17,8 +22,12 @@ module.exports = class GameScene extends PIXI.Container
     @camera = new Camera(@world)
 
     # set up ship
-    @ship = new Ship
+    @ship = PIXI.Sprite.fromImage "/img/ship.png"
+    @ship.scale.set 0.8
     @ship.anchor.set 0.5
+    Velocity.bless(@ship)
+    StupidSkewTrick.bless(@ship)
+
 
     # set up background
     @background = new Background(@ship)
