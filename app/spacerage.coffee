@@ -21,4 +21,4 @@ module.exports = SpaceRage =
     app.stage.addChild(@scene)
 
   update: (delta) ->
-    @scene.update(delta)
+    @scene?.update(delta)
