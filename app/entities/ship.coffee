@@ -10,6 +10,9 @@ module.exports = class Ship extends PIXI.Sprite
     @angularVelocity = 0
     app.ticker.add @updateVelocity
 
+    # EXPERIMENTAL: skew image according to rotation
+    app.ticker.add =>
+      @skew.set(@angularVelocity / 2.5)
 
   updateVelocity: (delta) =>
     # Apply velocity to our position
