@@ -6,7 +6,7 @@ CanUpdate = require "../components/can_update"
 
 HasStupidSkewTrick = (obj) ->
   app.ticker.add ->
-    obj.skew.set(obj.angularVelocity / 3)
+    obj.skew.set(obj.angularVelocity / 4)
 
 module.exports = class GameScene extends PIXI.Container
   constructor: ->
@@ -21,7 +21,7 @@ module.exports = class GameScene extends PIXI.Container
 
     # set up ship
     @ship = PIXI.Sprite.fromImage "/img/ship.png"
-    @ship.scale.set 0.8
+    @ship.scale.set 0.6
     @ship.anchor.set 0.5
     CanUpdate(@ship)
     HasVelocity(@ship)
@@ -68,13 +68,17 @@ module.exports = class GameScene extends PIXI.Container
       @ship.accelerateRotation(0.005 / delta)
 
     if (key.isPressed("space"))
-      @fireBullet()
+      @fireBullet() if @canFireBullet()
+
+  canFireBullet: ->
+    Date.now() > (@lastFiredAt || 0) + 50
 
   fireBullet: ->
-    bullet = @makeBullet()
-    @bullets.addChild(bullet)
+    @bullets.addChild @makeBullet(-43, -4)
+    @bullets.addChild @makeBullet(43, -4)
+    @lastFiredAt = Date.now()
 
-  makeBullet: ->
+  makeBullet: (offsetX = 0, offsetY = 0) ->
     bullet = new PIXI.Graphics
     bullet.beginFill(0xFFFFFF, 0.1);
     bullet.drawCircle(0, 0, 15);
@@ -86,8 +90,7 @@ module.exports = class GameScene extends PIXI.Container
     # set up initial position and movement
     CanUpdate(bullet)
     HasVelocity(bullet)
-    bullet.x = @ship.position.x
-    bullet.y = @ship.position.y
+    bullet.position = new Vec2(@ship.x, @ship.y).add(new Vec2(offsetX, offsetY).rotate(@ship.rotation))
     bullet.rotation = @ship.rotation
     bullet.drag = 1
     bullet.accelerateForward(20)
