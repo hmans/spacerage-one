@@ -48,10 +48,10 @@ module.exports = class GameScene extends PIXI.Container
     @handleInput(delta)
 
     # update bullets
-    for bullet in @bullets.children by -1
+    for bullet, i in @bullets.children by -1
       bullet.update(delta)
       if now > bullet.created + 1000
-        @bullets.removeChild(bullet)
+        @bullets.removeChildAt(i)
 
 
   handleInput: (delta) ->
