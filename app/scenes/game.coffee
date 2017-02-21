@@ -1,6 +1,7 @@
 Camera = require "../camera"
 Vec2 = require "../vec2"
 Background = require "../entities/background"
+Enemy = require "../entities/enemy"
 HasVelocity = require "../components/has_velocity"
 CanUpdate = require "../components/can_update"
 
@@ -30,6 +31,9 @@ module.exports = class GameScene extends PIXI.Container
     # set up bullets
     @bullets = new PIXI.Container
 
+    # set up enemies
+    @enemies = new PIXI.Container
+
     # set up background
     @background = new Background(@ship)
 
@@ -37,6 +41,7 @@ module.exports = class GameScene extends PIXI.Container
     @world.addChild @background
     @world.addChild @ship
     @world.addChild @bullets
+    @world.addChild @enemies
 
 
   update: (delta) ->
@@ -52,6 +57,10 @@ module.exports = class GameScene extends PIXI.Container
       bullet.update(delta)
       if now > bullet.created + 1000
         @bullets.removeChildAt(i)
+
+    # update enemies
+    for enemy, i in @enemies.children by -1
+      enemy.update(delta)
 
 
   handleInput: (delta) ->
@@ -69,6 +78,9 @@ module.exports = class GameScene extends PIXI.Container
 
     if (key.isPressed("space"))
       @fireBullet() if @canFireBullet()
+
+    if (key.isPressed("e"))
+      @spawnEnemy()
 
   canFireBullet: ->
     Date.now() > (@lastFiredAt || 0) + 50
@@ -99,3 +111,21 @@ module.exports = class GameScene extends PIXI.Container
     bullet.created = Date.now()
 
     bullet
+
+
+  spawnEnemy: ->
+    @enemies.addChild @makeEnemy()
+
+  makeEnemy: ->
+    enemy = new Enemy
+
+    enemy.position = Vec2.up
+      .scale(Math.random() * 1000)
+      .rotate(Math.random() * 2 * Math.PI)
+      .add(new Vec2(@ship.x, @ship.y))
+
+    enemy.rotation = Math.random() * 2 * Math.PI
+
+    enemy.accelerateForward(3)
+
+    enemy
