@@ -38,7 +38,7 @@ module.exports = class GameScene extends PIXI.Container
     @bullets = new PIXI.Container
 
     # set up enemies
-    @enemies = new PIXI.Container
+    @enemies = new PIXI.particles.ParticleContainer
 
     # set up explosions
     @explosions = new Explosions

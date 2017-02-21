@@ -1,4 +1,4 @@
-module.exports = class Background extends PIXI.Container
+module.exports = class Background extends PIXI.particles.ParticleContainer
   constructor: (@target) ->
     super()
     @texture = PIXI.Texture.fromImage("/img/space.jpg")
