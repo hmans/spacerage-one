@@ -45,9 +45,10 @@ module.exports = class GameScene extends PIXI.Container
   update: (delta) ->
     now = Date.now()
 
-    @handleInput(delta)
     @camera.lookAt(@ship)
     @ship.update(delta)
+
+    @handleInput(delta)
 
     # update bullets
     for bullet in @bullets.children by -1
