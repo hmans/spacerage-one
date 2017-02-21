@@ -1,4 +1,5 @@
 require "pixi.js"
+require "keymaster"
 
 GameScene = require "./scenes/game"
 

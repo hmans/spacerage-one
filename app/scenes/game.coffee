@@ -4,12 +4,9 @@ Background = require "../entities/background"
 HasVelocity = require "../components/has_velocity"
 CanUpdate = require "../components/can_update"
 
-
 HasStupidSkewTrick = (obj) ->
   app.ticker.add ->
     obj.skew.set(obj.angularVelocity / 3)
-
-require "keymaster"
 
 module.exports = class GameScene extends PIXI.Container
   constructor: ->
