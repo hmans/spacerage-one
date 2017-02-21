@@ -3,7 +3,7 @@ class Explosions extends PIXI.Container
     now = Date.now()
 
     for explosion, i in @children by -1
-      if now > explosion.started + 500
+      if explosion.finished
         @removeChildAt(i)
       else
         explosion.update(delta)

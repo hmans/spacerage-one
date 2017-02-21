@@ -2,6 +2,8 @@ require "pixi.js"
 require "keymaster"
 require "howler"
 
+window.TWEEN = require "tween.js"
+
 GameScene = require "./scenes/game"
 
 module.exports = SpaceRage =
@@ -27,4 +29,5 @@ module.exports = SpaceRage =
     app.stage.addChild(@scene)
 
   update: (delta) ->
+    TWEEN.update()
     @scene?.update(delta)
