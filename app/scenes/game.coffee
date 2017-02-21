@@ -43,10 +43,10 @@ module.exports = class GameScene extends PIXI.Container
 
   handleInput: (delta) ->
     if (key.isPressed("W") || key.isPressed("up"))
-      @ship.accelerate(Vec2.up.scale(0.8 / delta).rotate(@ship.rotation))
+      @ship.accelerateForward(0.8 / delta)
 
     if (key.isPressed("S") || key.isPressed("down"))
-      @ship.accelerate(Vec2.up.scale(-0.4 / delta).rotate(@ship.rotation))
+      @ship.accelerateForward(-0.5 / delta)
 
     if (key.isPressed("A") || key.isPressed("left"))
       @ship.accelerateRotation(-0.005 / delta)

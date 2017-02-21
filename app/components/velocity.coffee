@@ -8,6 +8,9 @@ module.exports = class Velocity
     obj.accelerate = (vec) ->
       @velocity = @velocity.add(vec)
 
+    obj.accelerateForward = (n) ->
+      @accelerate Vec2.up.scale(n).rotate(@rotation)
+
     obj.accelerateRotation = (n) ->
       @angularVelocity += n
 
