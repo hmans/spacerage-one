@@ -23,6 +23,11 @@ module.exports = class Vec2
     r[1] += center.y
     new Vec2(r[0], r[1])
 
+  distance: (vec) ->
+    x = @x - vec.x
+    y = @y - vec.y
+    Math.sqrt(x * x + y * y)
+
   @up: new Vec2(0, -1)
 
 #
@@ -43,10 +48,5 @@ module.exports = class Vec2
 #   return new Vec2(this.x * len, this.y * len);
 # };
 #
-# Vec2.prototype.distance = function (vec) {
-#   var x = this.x - vec.x;
-#   var y = this.y - vec.y;
-#   return Math.sqrt(x * x + y * y);
-# };
 #
 # Vec2.UP = new Vec2(0, -1)

@@ -52,15 +52,25 @@ module.exports = class GameScene extends PIXI.Container
 
     @handleInput(delta)
 
-    # update bullets
-    for bullet, i in @bullets.children by -1
-      bullet.update(delta)
-      if now > bullet.created + 1000
-        @bullets.removeChildAt(i)
-
     # update enemies
     for enemy, i in @enemies.children by -1
       enemy.update(delta)
+
+    # update bullets
+    for bullet, i in @bullets.children by -1
+      # check bullet lifetime
+      if now > bullet.created + 1000
+        @bullets.removeChildAt(i)
+      else
+        bullet.update(delta)
+
+        # check collisions
+        for enemy, t in @enemies.children by -1
+          distance = new Vec2(enemy.x, enemy.y).distance(new Vec2(bullet.x, bullet.y))
+          if distance < 30
+            console.log "COLLISION!"
+            @enemies.removeChildAt(t)
+            @bullets.removeChildAt(i)
 
 
   handleInput: (delta) ->
