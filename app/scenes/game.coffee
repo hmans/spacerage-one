@@ -53,6 +53,9 @@ module.exports = class GameScene extends PIXI.Container
     @world.addChild @enemies
     @world.addChild @explosions
 
+    # Start enemy spawner
+    @scheduleSpawnEnemy()
+
 
   update: (delta) ->
     now = Date.now()
@@ -145,6 +148,12 @@ module.exports = class GameScene extends PIXI.Container
 
   spawnEnemy: ->
     @enemies.addChild @makeEnemy()
+
+  scheduleSpawnEnemy: ->
+    setTimeout =>
+      @spawnEnemy()
+      @scheduleSpawnEnemy()
+    , 500
 
   makeEnemy: ->
     enemy = new Enemy
