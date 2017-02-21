@@ -17,6 +17,7 @@ module.exports = class GameScene extends PIXI.Container
 
     # load sounds
     @fireSound = new Howl src: ['/sounds/laser.wav']
+    @explosionSound = new Howl src: ['/sounds/explosion.wav']
 
     # set up world
     @world = new PIXI.Container
@@ -82,6 +83,7 @@ module.exports = class GameScene extends PIXI.Container
             explosion = new Explosion()
             explosion.position = enemy.position
             @explosions.addChild(explosion)
+            @explosionSound.play()
 
             # remove enemy and bullet
             @enemies.removeChildAt(t)
