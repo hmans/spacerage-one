@@ -53,3 +53,32 @@ module.exports = class GameScene extends PIXI.Container
 
     if (key.isPressed("D") || key.isPressed("right"))
       @ship.accelerateRotation(0.005 / delta)
+
+    if (key.isPressed("space"))
+      @fireBullet()
+
+  fireBullet: ->
+    bullet = @makeBullet()
+    @world.addChild(bullet)
+
+  makeBullet: ->
+    bullet = new PIXI.Graphics
+    bullet.beginFill(0xFFFFFF, 0.1);
+    bullet.drawCircle(0, 0, 15);
+    bullet.beginFill(0xFFFFFF, 0.4);
+    bullet.drawCircle(0, 0, 8);
+    bullet.beginFill(0xFFFFFF, 1);
+    bullet.drawCircle(0, 0, 5);
+
+    # set up initial position and movement
+    Velocity.bless(bullet)
+    bullet.x = @ship.position.x
+    bullet.y = @ship.position.y
+    bullet.rotation = @ship.rotation
+    bullet.drag = 1
+    bullet.accelerateForward(20)
+
+    # set up ticker to remove bullet
+    bullet.created = Date.now()
+
+    bullet
