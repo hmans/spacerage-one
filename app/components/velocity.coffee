@@ -4,6 +4,8 @@ module.exports = class Velocity
   @bless: (obj) ->
     obj.velocity = new Vec2
     obj.angularVelocity = 0
+    obj.drag = 0.95
+    obj.angularDrag = 0.95
 
     obj.accelerate = (vec) ->
       @velocity = @velocity.add(vec)
@@ -20,13 +22,13 @@ module.exports = class Velocity
       @y += @velocity.y / delta
 
       # Apply drag to velocity
-      @velocity = @velocity.scale(0.95 / delta)
+      @velocity = @velocity.scale(@drag / delta)
 
       # Apply angular velocity to our rotation
       @rotation += @angularVelocity / delta
 
       # Apply drag to angular velocity
-      @angularVelocity *= 0.95 / delta
+      @angularVelocity *= @angularDrag / delta
 
     # set up velocity
     app.ticker.add obj.updateVelocity.bind(obj)
