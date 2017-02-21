@@ -2,6 +2,8 @@ Camera = require "../camera"
 Vec2 = require "../vec2"
 Background = require "../entities/background"
 Enemy = require "../entities/enemy"
+Explosion = require "../entities/explosion"
+Explosions = require "../entities/explosions"
 HasVelocity = require "../components/has_velocity"
 CanUpdate = require "../components/can_update"
 
@@ -34,6 +36,9 @@ module.exports = class GameScene extends PIXI.Container
     # set up enemies
     @enemies = new PIXI.Container
 
+    # set up explosions
+    @explosions = new Explosions
+
     # set up background
     @background = new Background(@ship)
 
@@ -42,6 +47,7 @@ module.exports = class GameScene extends PIXI.Container
     @world.addChild @ship
     @world.addChild @bullets
     @world.addChild @enemies
+    @world.addChild @explosions
 
 
   update: (delta) ->
@@ -67,11 +73,19 @@ module.exports = class GameScene extends PIXI.Container
         # check collisions
         for enemy, t in @enemies.children by -1
           distance = new Vec2(enemy.x, enemy.y).distance(new Vec2(bullet.x, bullet.y))
+
           if distance < 30
-            console.log "COLLISION!"
+            # create an explosion for the enemy ship
+            explosion = new Explosion()
+            explosion.position = enemy.position
+            @explosions.addChild(explosion)
+
+            # remove enemy and bullet
             @enemies.removeChildAt(t)
             @bullets.removeChildAt(i)
 
+    # update explosions
+    @explosions.update(delta)
 
   handleInput: (delta) ->
     if (key.isPressed("W") || key.isPressed("up"))
