@@ -15,6 +15,9 @@ module.exports = class GameScene extends PIXI.Container
   constructor: ->
     super()
 
+    # load sounds
+    @fireSound = new Howl src: ['/sounds/laser.wav']
+
     # set up world
     @world = new PIXI.Container
     @addChild @world
@@ -110,6 +113,7 @@ module.exports = class GameScene extends PIXI.Container
     Date.now() > (@lastFiredAt || 0) + 50
 
   fireBullet: ->
+    @fireSound.play()
     @bullets.addChild @makeBullet(-43, -4)
     @bullets.addChild @makeBullet(43, -4)
     @lastFiredAt = Date.now()

@@ -1,5 +1,6 @@
 require "pixi.js"
 require "keymaster"
+require "howler"
 
 GameScene = require "./scenes/game"
 

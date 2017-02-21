@@ -20,6 +20,7 @@
     "brunch": "^2",
     "clean-css-brunch": "^2",
     "coffee-script-brunch": "^2.10.1",
+    "howler": "^2.0.2",
     "uglify-js-brunch": "^2"
   }
 }
