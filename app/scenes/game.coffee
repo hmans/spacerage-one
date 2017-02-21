@@ -1,12 +1,13 @@
 Camera = require "../camera"
 Vec2 = require "../vec2"
 Background = require "../entities/background"
-Velocity = require "../components/velocity"
+HasVelocity = require "../components/has_velocity"
+CanUpdate = require "../components/can_update"
 
-class StupidSkewTrick
-  @bless: (obj) ->
-    app.ticker.add ->
-      obj.skew.set(obj.angularVelocity / 3)
+
+HasStupidSkewTrick = (obj) ->
+  app.ticker.add ->
+    obj.skew.set(obj.angularVelocity / 3)
 
 require "keymaster"
 
@@ -25,9 +26,12 @@ module.exports = class GameScene extends PIXI.Container
     @ship = PIXI.Sprite.fromImage "/img/ship.png"
     @ship.scale.set 0.8
     @ship.anchor.set 0.5
-    Velocity.bless(@ship)
-    StupidSkewTrick.bless(@ship)
+    CanUpdate(@ship)
+    HasVelocity(@ship)
+    HasStupidSkewTrick(@ship)
 
+    # set up bullets
+    @bullets = new PIXI.Container
 
     # set up background
     @background = new Background(@ship)
@@ -35,11 +39,22 @@ module.exports = class GameScene extends PIXI.Container
     # Add entities to our world stage
     @world.addChild @background
     @world.addChild @ship
+    @world.addChild @bullets
 
 
   update: (delta) ->
+    now = Date.now()
+
     @handleInput(delta)
     @camera.lookAt(@ship)
+    @ship.update(delta)
+
+    # update bullets
+    for bullet in @bullets.children by -1
+      bullet.update(delta)
+      if now > bullet.created + 1000
+        @bullets.removeChild(bullet)
+
 
   handleInput: (delta) ->
     if (key.isPressed("W") || key.isPressed("up"))
@@ -59,7 +74,7 @@ module.exports = class GameScene extends PIXI.Container
 
   fireBullet: ->
     bullet = @makeBullet()
-    @world.addChild(bullet)
+    @bullets.addChild(bullet)
 
   makeBullet: ->
     bullet = new PIXI.Graphics
@@ -71,7 +86,8 @@ module.exports = class GameScene extends PIXI.Container
     bullet.drawCircle(0, 0, 5);
 
     # set up initial position and movement
-    Velocity.bless(bullet)
+    CanUpdate(bullet)
+    HasVelocity(bullet)
     bullet.x = @ship.position.x
     bullet.y = @ship.position.y
     bullet.rotation = @ship.rotation
