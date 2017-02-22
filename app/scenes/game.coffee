@@ -16,8 +16,13 @@ module.exports = class GameScene extends PIXI.Container
     super()
 
     # load sounds
-    @fireSound = new Howl src: ['/sounds/laser.wav']
-    @explosionSound = new Howl src: ['/sounds/explosion.wav']
+    @fireSound = new Howl
+      src: ['/sounds/laser.wav']
+      volume: 0.3
+
+    @explosionSound = new Howl
+      src: ['/sounds/explosion.wav']
+      volume: 0.4
 
     # set up world
     @world = new PIXI.Container
