@@ -11,19 +11,21 @@ class Enemy extends PIXI.Sprite
     CanUpdate(@)
     HasVelocity(@)
 
-    @updateMethods.push =>
-      targetVec = new Vec2(@target.x, @target.y).subtract(@)
-      lookVec = Vec2.up.rotate(@rotation)
-      angle = targetVec.angleTo(lookVec)
+    @updateMethods.push @updateEnemy
 
-      if angle > 0.2
-        @accelerateRotation +0.002
-        @accelerateForward 0.3
-      else if angle < -0.2
-        @accelerateRotation -0.002
-        @accelerateForward 0.3
-      else
-        @accelerateForward 0.3
+  updateEnemy: =>
+    targetVec = new Vec2(@target.x, @target.y).subtract(@)
+    lookVec = Vec2.up.rotate(@rotation)
+    angle = targetVec.angleTo(lookVec)
+
+    if angle > 0.2
+      @accelerateRotation +0.002
+      @accelerateForward 0.3
+    else if angle < -0.2
+      @accelerateRotation -0.002
+      @accelerateForward 0.3
+    else
+      @accelerateForward 0.3
 
 
 module.exports = Enemy
