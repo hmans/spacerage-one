@@ -1,9 +1,9 @@
 CanUpdate = (obj) ->
   obj.updateMethods = []
 
-  obj.update = (delta) ->
+  obj.update = ->
     for meth in obj.updateMethods
-      meth(delta)
+      meth()
 
 
 module.exports = CanUpdate

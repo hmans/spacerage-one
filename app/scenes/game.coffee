@@ -68,19 +68,19 @@ module.exports = class GameScene extends PIXI.Container
     @scheduleSpawnEnemy()
 
 
-  update: (delta) ->
+  update: ->
     now = Date.now()
 
-    @debug.text = delta
+    @debug.text = "moo"
 
     @camera.lookAt(@ship)
-    @ship.update(delta)
+    @ship.update()
 
-    @handleInput(delta)
+    @handleInput()
 
     # update enemies
     for enemy, i in @enemies.children by -1
-      enemy.update(delta)
+      enemy.update()
 
     # update bullets
     for bullet, i in @bullets.children by -1
@@ -88,7 +88,7 @@ module.exports = class GameScene extends PIXI.Container
       if now > bullet.created + 1000
         @bullets.removeChildAt(i)
       else
-        bullet.update(delta)
+        bullet.update()
 
         # check collisions
         for enemy, t in @enemies.children by -1
@@ -106,9 +106,9 @@ module.exports = class GameScene extends PIXI.Container
             @bullets.removeChildAt(i)
 
     # update explosions
-    @explosions.update(delta)
+    @explosions.update()
 
-  handleInput: (delta) ->
+  handleInput: ->
     if (key.isPressed("W") || key.isPressed("up"))
       @ship.accelerateForward(0.8)
 

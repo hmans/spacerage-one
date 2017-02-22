@@ -33,7 +33,7 @@ module.exports = SpaceRage =
 
         while lag >= frameDuration
           TWEEN.update()
-          @scene?.update(1)
+          @scene?.update()
           lag = lag - frameDuration
 
 

@@ -14,7 +14,7 @@ class Explosion extends PIXI.Graphics
         @finished = true
       .start()
 
-  update: (delta) ->
+  update: ->
     @clear()
     @beginFill(0xFFFFFF, @opacity)
     @drawCircle(0, 0, @radius)

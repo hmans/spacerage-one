@@ -15,7 +15,7 @@ module.exports = HasVelocity = (obj) ->
   obj.accelerateRotation = (n) ->
     @angularVelocity += n
 
-  obj.updateVelocity = (delta) ->
+  obj.updateVelocity = ->
     # Apply velocity to our position
     @x += @velocity.x
     @y += @velocity.y
