@@ -18,11 +18,24 @@ module.exports = SpaceRage =
     loader.add "ship", "/img/ship.png"
     loader.add "background", "/img/space.jpg"
     loader.load =>
-      @start = Date.now()
-      @lag = 0
-      @frameDuration = 1000 / 60
+      frameDuration = 1000 / 60
+      start = Date.now()
+      lag = 0
+
       @startScene(new GameScene())
-      app.ticker.add @update.bind(this)
+
+      app.ticker.add =>
+        now = Date.now()
+        elapsed = now - start
+        start = now
+
+        lag += elapsed
+
+        while lag >= frameDuration
+          TWEEN.update()
+          @scene?.update(1)
+          lag = lag - frameDuration
+
 
   startScene: (scene) ->
     if @scene
@@ -30,15 +43,3 @@ module.exports = SpaceRage =
 
     @scene = scene
     app.stage.addChild(@scene)
-
-  update: (delta) ->
-    now = Date.now()
-    elapsed = now - @start
-    @start = now
-
-    @lag += elapsed
-
-    while @lag >= @frameDuration
-      TWEEN.update()
-      @scene?.update(1)
-      @lag = @lag - @frameDuration
