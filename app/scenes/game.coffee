@@ -45,6 +45,7 @@ module.exports = class GameScene extends PIXI.Container
 
     # set up bullets
     @bullets = new PIXI.Container
+    @enemyBullets = new PIXI.Container
 
     # set up enemies
     @enemies = new PIXI.Container
@@ -64,6 +65,7 @@ module.exports = class GameScene extends PIXI.Container
     @world.addChild @background
     @world.addChild @ship
     @world.addChild @bullets
+    @world.addChild @enemyBullets
     @world.addChild @enemies
     @world.addChild @explosions
     # @addChild @debug
@@ -109,6 +111,15 @@ module.exports = class GameScene extends PIXI.Container
             # remove enemy and bullet
             @enemies.removeChildAt(t)
             @bullets.removeChildAt(i)
+
+    # update enemy bullets
+    for bullet, i in @enemyBullets.children by -1
+      # check bullet lifetime
+      if now > bullet.created + 3000
+        @enemyBullets.removeChildAt(i)
+      else
+        bullet.update()
+
 
     # update explosions
     @explosions.update()
@@ -170,7 +181,7 @@ module.exports = class GameScene extends PIXI.Container
     , 500
 
   makeEnemy: ->
-    enemy = new Enemy(@ship)
+    enemy = new Enemy(@ship, @fireEnemyBullet)
 
     enemy.position = Vec2.up
       .scale(1000 + Math.random() * 1000)
@@ -180,3 +191,25 @@ module.exports = class GameScene extends PIXI.Container
     enemy.rotation = Math.random() * 2 * Math.PI
 
     enemy
+
+  fireEnemyBullet: (enemy) =>
+    @fireSound.play()
+
+    bullet = new PIXI.Graphics
+    bullet.beginFill(0xFF0000, 0.5);
+    bullet.drawCircle(0, 0, 6);
+    bullet.beginFill(0xFF0000, 1);
+    bullet.drawCircle(0, 0, 3);
+
+    # set up initial position and movement
+    CanUpdate(bullet)
+    HasVelocity(bullet)
+    bullet.position = new Vec2(enemy.x, enemy.y)
+    bullet.rotation = enemy.rotation
+    bullet.drag = 1
+    bullet.accelerateForward(10)
+
+    # set up ticker to remove bullet
+    bullet.created = Date.now()
+
+    @enemyBullets.addChild bullet

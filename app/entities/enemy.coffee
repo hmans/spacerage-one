@@ -1,12 +1,15 @@
 CanUpdate = require "../components/can_update"
 HasVelocity = require "../components/has_velocity"
 Vec2 = require "../vec2"
+Timer = require "../timer"
 
 class Enemy extends PIXI.Sprite
-  constructor: (@target) ->
+  constructor: (@target, @fireFn) ->
     super(PIXI.Texture.fromImage("/img/enemy.png"))
     @anchor.set(0.5)
     @scale.set(0.7)
+
+    @fireTimer = new Timer
 
     CanUpdate(@)
     HasVelocity(@)
@@ -14,6 +17,7 @@ class Enemy extends PIXI.Sprite
     @updateMethods.push @updateEnemy
 
   updateEnemy: =>
+    # move towards target
     targetVec = new Vec2(@target.x, @target.y).subtract(@)
     lookVec = Vec2.up.rotate(@rotation)
     angle = targetVec.angleTo(lookVec)
@@ -26,6 +30,11 @@ class Enemy extends PIXI.Sprite
       @accelerateForward 0.3
     else
       @accelerateForward 0.3
+
+      # fire at target
+      if @fireFn? && targetVec.length() < 900
+        @fireTimer.cooldown 250, =>
+          @fireFn(@)
 
 
 module.exports = Enemy
