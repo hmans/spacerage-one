@@ -163,17 +163,17 @@ module.exports = class GameScene extends PIXI.Container
 
   scheduleSpawnEnemy: ->
     setTimeout =>
-      if @enemies.children.length < 20
+      if @enemies.children.length < 40
         @spawnEnemy()
 
       @scheduleSpawnEnemy()
     , 500
 
   makeEnemy: ->
-    enemy = new Enemy
+    enemy = new Enemy(@ship)
 
     enemy.position = Vec2.up
-      .scale(Math.random() * 1000)
+      .scale(1000 + Math.random() * 1000)
       .rotate(Math.random() * 2 * Math.PI)
       .add(new Vec2(@ship.x, @ship.y))
 
