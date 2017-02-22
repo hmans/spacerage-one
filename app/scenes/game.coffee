@@ -8,7 +8,7 @@ HasVelocity = require "../components/has_velocity"
 CanUpdate = require "../components/can_update"
 
 HasStupidSkewTrick = (obj) ->
-  app.ticker.add ->
+  obj.updateMethods.push ->
     obj.skew.set(obj.angularVelocity / 4)
 
 module.exports = class GameScene extends PIXI.Container
@@ -62,7 +62,7 @@ module.exports = class GameScene extends PIXI.Container
     @world.addChild @bullets
     @world.addChild @enemies
     @world.addChild @explosions
-    @addChild @debug
+    # @addChild @debug
 
     # Start enemy spawner
     @scheduleSpawnEnemy()
@@ -75,6 +75,7 @@ module.exports = class GameScene extends PIXI.Container
 
     @camera.lookAt(@ship)
     @ship.update()
+    @background.update()
 
     @handleInput()
 

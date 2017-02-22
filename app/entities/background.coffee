@@ -13,7 +13,6 @@ module.exports = class Background extends PIXI.particles.ParticleContainer
     # Set pivot
     @pivot.set(1.5 * @texture.width, 1.5 * @texture.height)
 
-    # Set up update function to keep background centered on target
-    app.ticker.add =>
-      @x = Math.floor(@target.x / @texture.width) * @texture.width
-      @y = Math.floor(@target.y / @texture.height) * @texture.height
+  update: ->
+    @x = Math.floor(@target.x / @texture.width) * @texture.width
+    @y = Math.floor(@target.y / @texture.height) * @texture.height
