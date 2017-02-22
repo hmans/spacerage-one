@@ -120,6 +120,16 @@ module.exports = class GameScene extends PIXI.Container
       else
         bullet.update()
 
+        distance = new Vec2(@ship.x, @ship.y).distance(bullet)
+        if distance < 50
+          # apply a bit of impact to the player ship
+          @ship.velocity = @ship.velocity.add(bullet.velocity.scale(0.2))
+          @ship.accelerateRotation(-0.01 + Math.random() * 0.02)
+
+          # remove bullet
+          @enemyBullets.removeChildAt(i)
+
+
 
     # update explosions
     @explosions.update()
