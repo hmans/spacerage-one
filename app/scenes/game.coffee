@@ -1,4 +1,5 @@
 Camera = require "../camera"
+Timer = require "../timer"
 Vec2 = require "../vec2"
 Background = require "../entities/background"
 Enemy = require "../entities/enemy"
@@ -23,6 +24,9 @@ module.exports = class GameScene extends PIXI.Container
     @explosionSound = new Howl
       src: ['/sounds/explosion.wav']
       volume: 0.4
+
+    # set up timers
+    @fireTimer = new Timer
 
     # set up world
     @world = new PIXI.Container
@@ -123,19 +127,13 @@ module.exports = class GameScene extends PIXI.Container
       @ship.accelerateRotation(0.005)
 
     if (key.isPressed("space"))
-      @fireBullet() if @canFireBullet()
+      @fireTimer.cooldown 100, =>
+        @fireSound.play()
+        @bullets.addChild @makeBullet(-43, -4)
+        @bullets.addChild @makeBullet(43, -4)
 
     if (key.isPressed("e"))
       @spawnEnemy()
-
-  canFireBullet: ->
-    Date.now() > (@lastFiredAt || 0) + 50
-
-  fireBullet: ->
-    @fireSound.play()
-    @bullets.addChild @makeBullet(-43, -4)
-    @bullets.addChild @makeBullet(43, -4)
-    @lastFiredAt = Date.now()
 
   makeBullet: (offsetX = 0, offsetY = 0) ->
     bullet = new PIXI.Graphics

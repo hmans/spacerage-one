@@ -5,7 +5,6 @@ class Explosion extends PIXI.Graphics
     @radius = 30
     @opacity = 1
     @finished = false
-    @started = Date.now()
 
     new TWEEN.Tween(@)
       .to({radius: 100, opacity: 0.0}, 1000)
