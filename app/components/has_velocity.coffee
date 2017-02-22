@@ -17,18 +17,18 @@ module.exports = HasVelocity = (obj) ->
 
   obj.updateVelocity = (delta) ->
     # Apply velocity to our position
-    @x += @velocity.x / delta
-    @y += @velocity.y / delta
+    @x += @velocity.x
+    @y += @velocity.y
 
     # Apply drag to velocity
     if @drag != 1
-      @velocity = @velocity.scale(@drag / delta)
+      @velocity = @velocity.scale(@drag)
 
     # Apply angular velocity to our rotation
-    @rotation += @angularVelocity / delta
+    @rotation += @angularVelocity
 
     # Apply drag to angular velocity
     if @angularDrag != 1
-      @angularVelocity *= @angularDrag / delta
+      @angularVelocity *= @angularDrag
 
   obj.updateMethods.push(obj.updateVelocity.bind(obj))

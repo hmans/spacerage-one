@@ -51,12 +51,18 @@ module.exports = class GameScene extends PIXI.Container
     # set up background
     @background = new Background(@ship)
 
+    # set up debug text
+    @debug = new PIXI.Text("moo", {fontFamily : 'Arial', fontSize: 24, fill : 0xff1010, align : 'center'})
+    @debug.x = 10
+    @debug.y = 10
+
     # Add entities to our world stage
     @world.addChild @background
     @world.addChild @ship
     @world.addChild @bullets
     @world.addChild @enemies
     @world.addChild @explosions
+    @addChild @debug
 
     # Start enemy spawner
     @scheduleSpawnEnemy()
@@ -64,6 +70,8 @@ module.exports = class GameScene extends PIXI.Container
 
   update: (delta) ->
     now = Date.now()
+
+    @debug.text = delta
 
     @camera.lookAt(@ship)
     @ship.update(delta)
@@ -102,16 +110,16 @@ module.exports = class GameScene extends PIXI.Container
 
   handleInput: (delta) ->
     if (key.isPressed("W") || key.isPressed("up"))
-      @ship.accelerateForward(0.8 / delta)
+      @ship.accelerateForward(0.8)
 
     if (key.isPressed("S") || key.isPressed("down"))
-      @ship.accelerateForward(-0.5 / delta)
+      @ship.accelerateForward(-0.5)
 
     if (key.isPressed("A") || key.isPressed("left"))
-      @ship.accelerateRotation(-0.005 / delta)
+      @ship.accelerateRotation(-0.005)
 
     if (key.isPressed("D") || key.isPressed("right"))
-      @ship.accelerateRotation(0.005 / delta)
+      @ship.accelerateRotation(0.005)
 
     if (key.isPressed("space"))
       @fireBullet() if @canFireBullet()
