@@ -22,6 +22,9 @@ class Enemy extends PIXI.Sprite
     lookVec = Vec2.up.rotate(@rotation)
     angle = targetVec.angleTo(lookVec)
 
+    # stupid pseudo-3d rotation effect
+    @scale.x = 0.7 - Math.abs(@angularVelocity * 3)
+
     if angle > 0.2
       @accelerateRotation +0.002
       @accelerateForward 0.3
