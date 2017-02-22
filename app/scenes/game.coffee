@@ -156,7 +156,9 @@ module.exports = class GameScene extends PIXI.Container
 
   scheduleSpawnEnemy: ->
     setTimeout =>
-      @spawnEnemy()
+      if @enemies.children.length < 20
+        @spawnEnemy()
+
       @scheduleSpawnEnemy()
     , 500
 
