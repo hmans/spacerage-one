@@ -28,12 +28,12 @@ module.exports = class Vec2
     y = @y - vec.y
     Math.sqrt(x * x + y * y)
 
+  dot: (vec) ->
+    @x * vec.x + @y * vec.y
+
+
   @up: new Vec2(0, -1)
 
-#
-# Vec2.prototype.dot = function (vec) {
-#   return (this.x * vec.x + this.y * vec.y);
-# };
 #
 # Vec2.prototype.cross = function (vec) {
 #   return (this.x * vec.y - this.y * vec.x);
