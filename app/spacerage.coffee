@@ -6,6 +6,10 @@ window.TWEEN = require "tween.js"
 
 GameScene = require "./scenes/game"
 
+frameDuration = 1000 / 60
+start = Date.now()
+lag = 0
+
 module.exports = SpaceRage =
   start: ->
     # Set up PIXI app
@@ -18,23 +22,22 @@ module.exports = SpaceRage =
     loader.add "ship", "/img/ship.png"
     loader.add "background", "/img/space.jpg"
     loader.load =>
-      frameDuration = 1000 / 60
-      start = Date.now()
-      lag = 0
-
       @startScene(new GameScene())
+      requestAnimationFrame @gameLoop.bind(@)
 
-      app.ticker.add =>
-        now = Date.now()
-        elapsed = now - start
-        start = now
+  gameLoop: ->
+    requestAnimationFrame @gameLoop.bind(@)
 
-        lag += elapsed
+    now = Date.now()
+    elapsed = now - start
+    start = now
 
-        while lag >= frameDuration
-          TWEEN.update()
-          @scene?.update()
-          lag = lag - frameDuration
+    lag += elapsed
+
+    while lag >= frameDuration
+      TWEEN.update()
+      @scene?.update()
+      lag = lag - frameDuration
 
 
   startScene: (scene) ->
