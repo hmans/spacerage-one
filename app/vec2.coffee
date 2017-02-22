@@ -31,6 +31,11 @@ module.exports = class Vec2
   dot: (vec) ->
     @x * vec.x + @y * vec.y
 
+  angleTo: (vec) ->
+    if vec?
+      Math.atan2(@y, @x) - Math.atan2(vec.y, vec.x)
+    else
+      Math.atan2(@y, @x)
 
   @up: new Vec2(0, -1)
 
