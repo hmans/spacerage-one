@@ -10,6 +10,8 @@ class Enemy extends PIXI.Sprite
     CanUpdate(@)
     HasVelocity(@)
 
-    @drag = 1
+    @updateMethods.push =>
+      @rotation += 0.02
+      @accelerateForward 0.3
 
 module.exports = Enemy

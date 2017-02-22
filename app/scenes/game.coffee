@@ -47,7 +47,7 @@ module.exports = class GameScene extends PIXI.Container
     @bullets = new PIXI.Container
 
     # set up enemies
-    @enemies = new PIXI.particles.ParticleContainer
+    @enemies = new PIXI.Container
 
     # set up explosions
     @explosions = new Explosions
@@ -178,7 +178,5 @@ module.exports = class GameScene extends PIXI.Container
       .add(new Vec2(@ship.x, @ship.y))
 
     enemy.rotation = Math.random() * 2 * Math.PI
-
-    enemy.accelerateForward(3)
 
     enemy
