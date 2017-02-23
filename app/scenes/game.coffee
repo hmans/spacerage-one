@@ -210,7 +210,7 @@ module.exports = class GameScene extends PIXI.Container
     enemy
 
   fireEnemyBullet: (enemy) =>
-    @fireSound.play()
+    # @fireSound.play()
 
     bullet = new PIXI.Graphics
     bullet.beginFill(0xFF0000, 0.5);
