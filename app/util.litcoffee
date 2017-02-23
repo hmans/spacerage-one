@@ -31,6 +31,12 @@ of random numbers through `Math.random`.
       else
         Math.random()
 
+We also provide `Util.randInt` which is just like `Util.rand`, but will always
+return an integer (as opposed to a float) value.
+
+    Util.randInt = (n, m) ->
+      Math.floor(Util.rand(n, m))
+
 
 ## That's all.
 
