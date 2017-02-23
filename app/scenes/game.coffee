@@ -1,5 +1,6 @@
 Camera = require "../camera"
 Timer = require "../timer"
+Joystick = require "../joystick"
 Vec2 = require "../vec2"
 Background = require "../entities/background"
 Ship = require "../entities/ship"
@@ -37,8 +38,9 @@ module.exports = class GameScene extends PIXI.Container
     @world = new PIXI.Container
     @addChild @world
 
-    # set up camera
+    # set up some tools
     @camera = new Camera(@world)
+    @joystick = new Joystick
 
     # set up entities
     @ship = new Ship
@@ -136,16 +138,16 @@ module.exports = class GameScene extends PIXI.Container
     @explosions.update()
 
   handleInput: ->
-    if (key.isPressed("W") || key.isPressed("up"))
+    if @joystick.up()
       @ship.accelerateForward(0.8)
 
-    if (key.isPressed("S") || key.isPressed("down"))
+    if @joystick.down()
       @ship.accelerateForward(-0.5)
 
-    if (key.isPressed("A") || key.isPressed("left"))
+    if @joystick.left()
       @ship.accelerateRotation(-0.005)
 
-    if (key.isPressed("D") || key.isPressed("right"))
+    if @joystick.right()
       @ship.accelerateRotation(0.005)
 
     if (key.isPressed("space"))
