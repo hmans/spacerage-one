@@ -67,6 +67,13 @@ module.exports = class GameScene extends PIXI.Container
     # Start enemy spawner
     @scheduleSpawnEnemy()
 
+    # Set up some global key events
+    key 'm', =>
+      if @music.playing()
+        @music.pause()
+      else
+        @music.play()
+
 
   update: ->
     now = Date.now()
