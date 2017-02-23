@@ -37,7 +37,14 @@ module.exports = class Vec2
     else
       Math.atan2(@y, @x)
 
+  normalize: ->
+    len = @length()
+    len = 1 / len if len > 0
+    new Vec2(@x * len, @y * len)
+
+
   @up: new Vec2(0, -1)
+  @origin: new Vec2(0, 0)
 
 #
 # Vec2.prototype.cross = function (vec) {
@@ -45,13 +52,6 @@ module.exports = class Vec2
 # };
 #
 #
-# Vec2.prototype.normalize = function () {
-#   var len = this.length();
-#   if (len > 0) {
-#     len = 1 / len;
-#   }
-#   return new Vec2(this.x * len, this.y * len);
-# };
 #
 #
 # Vec2.UP = new Vec2(0, -1)

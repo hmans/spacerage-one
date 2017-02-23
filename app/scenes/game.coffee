@@ -40,7 +40,7 @@ module.exports = class GameScene extends PIXI.Container
 
     # set up some tools
     @camera = new Camera(@world)
-    @joystick = new Joystick
+    @joystick = new Joystick(@)
 
     # set up entities
     @ship = new Ship
@@ -53,7 +53,7 @@ module.exports = class GameScene extends PIXI.Container
     @explosions = new Explosions
 
     # set up debug text
-    @debug = new PIXI.Text("moo", {fontFamily : 'Arial', fontSize: 24, fill : 0xff1010, align : 'center'})
+    @debug = new PIXI.Text("SPACERAGE! \\o/", {fontFamily : 'Arial', fontSize: 48, fill : 0xff1010, align : 'center'})
     @debug.x = 10
     @debug.y = 10
 
@@ -64,7 +64,7 @@ module.exports = class GameScene extends PIXI.Container
     @world.addChild @enemyBullets
     @world.addChild @enemies
     @world.addChild @explosions
-    # @addChild @debug
+    @addChild @debug
 
     # Start enemy spawner
     @scheduleSpawnEnemy()
@@ -79,8 +79,6 @@ module.exports = class GameScene extends PIXI.Container
 
   update: ->
     now = Date.now()
-
-    @debug.text = "moo"
 
     @joystick.update()
     @camera.lookAt(@ship)
@@ -142,7 +140,7 @@ module.exports = class GameScene extends PIXI.Container
     @ship.accelerateForward(0.8 * @joystick.y)
     @ship.accelerateRotation(0.005 * @joystick.x)
 
-    if @joystick.keyIsPressed("space")
+    if @joystick.fire()
       @fireTimer.cooldown 100, =>
         @fireSound.play()
         @bullets.addChild @makeBullet(-43, -4)
