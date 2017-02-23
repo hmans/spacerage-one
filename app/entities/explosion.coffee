@@ -9,9 +9,14 @@ class Explosion extends PIXI.Container
 
     @addChild @makeSplosion(Vec2.origin, 70, 1, 0xFFFF00)
 
-    for i in [1..10]
+    newSplosion = =>
       pos = Vec2.up.rotate(Math.random() * Math.PI * 2).scale(20 + Math.random() * 30)
       @addChild @makeSplosion(pos, 5 + Math.random() * 40, 0.5 + Math.random() * 0.5)
+
+    num = Math.floor(2 + Math.random() * 10)
+
+    for i in [1..num]
+      setTimeout newSplosion, Math.random() * 300
 
     new TWEEN.Tween(@)
       .delay(500)
