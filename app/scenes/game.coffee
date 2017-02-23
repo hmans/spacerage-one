@@ -25,6 +25,13 @@ module.exports = class GameScene extends PIXI.Container
       src: ['/sounds/explosion.wav']
       volume: 0.4
 
+    # start stupid music
+    @music = new Howl
+      src: ['/sounds/theme.mp3']
+      autoplay: true
+      loop: true
+      volume: 1
+
     # set up timers
     @fireTimer = new Timer
 
