@@ -31,11 +31,22 @@ of random numbers through `Math.random`.
       else
         Math.random()
 
+
+### Util.randInt
+
 We also provide `Util.randInt` which is just like `Util.rand`, but will always
 return an integer (as opposed to a float) value.
 
     Util.randInt = (n, m) ->
       Math.floor(Util.rand(n, m))
+
+
+### Util.randAngle
+
+Returns a random angle (ie. a random value between `0` and `Math.PI * 2`.)
+
+    Util.randAngle = (max = Math.PI * 2) ->
+      Util.rand(max)
 
 
 ## That's all.
