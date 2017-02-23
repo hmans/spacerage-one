@@ -1,3 +1,5 @@
+# Util
+
 This is the `Util` service module. It provides a bunch of utility
 methods that I couldn't find a nicer placer for anywhere else.
 
