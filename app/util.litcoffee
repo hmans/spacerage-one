@@ -3,12 +3,18 @@ methods that I couldn't find a nicer placer for anywhere else.
 
     Util = {}
 
-`Util.clamp` will clamp a number between the two given values.
+### Math Helpers
+
+#### Util.clamp
+
+Will clamp a number `n` between the two given values `min` and `max`.
 
     Util.clamp = (n, min, max) ->
       Math.min(Math.max(n, min), max)
 
-`Util.rand` provides some convenience functionality around the generation
+#### Util.rand
+
+Provides some convenience functionality around the generation
 of random numbers through `Math.random`.
 
     Util.rand = (n, m) ->
