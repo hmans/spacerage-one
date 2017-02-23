@@ -2,15 +2,13 @@ Camera = require "../camera"
 Timer = require "../timer"
 Vec2 = require "../vec2"
 Background = require "../entities/background"
+Ship = require "../entities/ship"
 Enemy = require "../entities/enemy"
 Explosion = require "../entities/explosion"
 Explosions = require "../entities/explosions"
 HasVelocity = require "../components/has_velocity"
 CanUpdate = require "../components/can_update"
 
-HasStupidSkewTrick = (obj) ->
-  obj.updateMethods.push ->
-    obj.skew.set(obj.angularVelocity / 4)
 
 module.exports = class GameScene extends PIXI.Container
   constructor: ->
@@ -43,12 +41,7 @@ module.exports = class GameScene extends PIXI.Container
     @camera = new Camera(@world)
 
     # set up ship
-    @ship = PIXI.Sprite.fromImage "/img/ship.png"
-    @ship.scale.set 0.6
-    @ship.anchor.set 0.5
-    CanUpdate(@ship)
-    HasVelocity(@ship)
-    HasStupidSkewTrick(@ship)
+    @ship = new Ship
 
     # set up bullets
     @bullets = new PIXI.Container
