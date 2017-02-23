@@ -1,6 +1,7 @@
 Camera = require "../camera"
 Timer = require "../timer"
 Joystick = require "../joystick"
+Util = require "../util"
 Vec2 = require "../vec2"
 Background = require "../entities/background"
 Ship = require "../entities/ship"
@@ -126,7 +127,7 @@ module.exports = class GameScene extends PIXI.Container
         if distance < 50
           # apply a bit of impact to the player ship
           @ship.velocity = @ship.velocity.add(bullet.velocity.scale(0.2))
-          @ship.accelerateRotation(-0.01 + Math.random() * 0.02)
+          @ship.accelerateRotation(Util.rand(-0.01, 0.01))
 
           # remove bullet
           @enemyBullets.removeChildAt(i)
@@ -187,11 +188,11 @@ module.exports = class GameScene extends PIXI.Container
     enemy = new Enemy(@ship, @fireEnemyBullet)
 
     enemy.position = Vec2.up
-      .scale(1000 + Math.random() * 1000)
-      .rotate(Math.random() * 2 * Math.PI)
+      .scale(Util.rand(1000, 2000))
+      .rotate(Util.randAngle())
       .add(new Vec2(@ship.x, @ship.y))
 
-    enemy.rotation = Math.random() * 2 * Math.PI
+    enemy.rotation = Util.randAngle()
 
     enemy
 
