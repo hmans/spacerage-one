@@ -3,16 +3,16 @@ methods that I couldn't find a nicer placer for anywhere else.
 
     Util = {}
 
-### Math Helpers
+## Math Helpers
 
-#### Util.clamp
+### Util.clamp
 
 Will clamp a number `n` between the two given values `min` and `max`.
 
     Util.clamp = (n, min, max) ->
       Math.min(Math.max(n, min), max)
 
-#### Util.rand
+### Util.rand
 
 Provides some convenience functionality around the generation
 of random numbers through `Math.random`.
@@ -32,7 +32,7 @@ of random numbers through `Math.random`.
         Math.random()
 
 
-### That's all.
+## That's all.
 
 Let's export it!
 
