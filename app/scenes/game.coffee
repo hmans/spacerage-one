@@ -40,21 +40,15 @@ module.exports = class GameScene extends PIXI.Container
     # set up camera
     @camera = new Camera(@world)
 
-    # set up ship
+    # set up entities
     @ship = new Ship
+    @background = new Background(@ship)
 
-    # set up bullets
+    # set up containers
     @bullets = new PIXI.Container
     @enemyBullets = new PIXI.Container
-
-    # set up enemies
     @enemies = new PIXI.Container
-
-    # set up explosions
     @explosions = new Explosions
-
-    # set up background
-    @background = new Background(@ship)
 
     # set up debug text
     @debug = new PIXI.Text("moo", {fontFamily : 'Arial', fontSize: 24, fill : 0xff1010, align : 'center'})
