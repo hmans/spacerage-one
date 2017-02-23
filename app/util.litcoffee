@@ -17,6 +17,12 @@ Will clamp a number `n` between the two given values `min` and `max`.
 Provides some convenience functionality around the generation
 of random numbers through `Math.random`.
 
+`Util.rand()` will simply return a random value between 0 and 1 like `Math.random()` does.
+
+`Util.rand(n)` will return a random value between 0 and `n`.
+
+`Util.rand(n, m)` will return a random value between `n` and `m`.
+
     Util.rand = (n, m) ->
       if n? && m?
         n + Math.random() * (m - n)
