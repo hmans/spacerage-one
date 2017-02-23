@@ -5,12 +5,19 @@ methods that I couldn't find a nicer placer for anywhere else.
 
 ## Math Helpers
 
+### Convenience constants
+
+    Util.pi  = Math.PI
+    Util.pi2 = Math.PI * 2
+
+
 ### Util.clamp
 
 Will clamp a number `n` between the two given values `min` and `max`.
 
     Util.clamp = (n, min, max) ->
       Math.min(Math.max(n, min), max)
+
 
 ### Util.rand
 
@@ -45,7 +52,7 @@ return an integer (as opposed to a float) value.
 
 Returns a random angle (ie. a random value between `0` and `Math.PI * 2`.)
 
-    Util.randAngle = (max = Math.PI * 2) ->
+    Util.randAngle = (max = Util.pi2) ->
       Util.rand(max)
 
 
