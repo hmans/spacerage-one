@@ -3,7 +3,7 @@ Vec2 = require "../vec2"
 class Explosion extends PIXI.Container
   constructor: ->
     super()
-    @scale.set(0.5)
+    @scale.set(0.3 + Math.random() * 0.5)
 
     @finished = false
 
