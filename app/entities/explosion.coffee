@@ -1,16 +1,17 @@
 Vec2 = require "../vec2"
+Util = require "../util"
 
 class Explosion extends PIXI.Container
   constructor: ->
     super()
-    @scale.set(0.3 + Math.random() * 0.5)
+    @scale.set(Util.rand(0.3, 0.8))
 
     @finished = false
 
     @addChild @makeSplosion(Vec2.origin, 70, 1, 0xFFFF00)
 
     newSplosion = =>
-      pos = Vec2.up.rotate(Math.random() * Math.PI * 2).scale(20 + Math.random() * 30)
+      pos = Vec2.up.rotate(Util.rand(Math.PI * 2)).scale(Util.rand(20, 50))
       @addChild @makeSplosion(pos, 5 + Math.random() * 40, 0.5 + Math.random() * 0.5)
 
     num = Math.floor(2 + Math.random() * 10)
