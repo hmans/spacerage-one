@@ -3,7 +3,7 @@ module.exports = class Camera
 
   lookAt: (target) ->
     @container.x = app.renderer.width / 2
-    @container.y = app.renderer.height / 2 + 180
+    @container.y = app.renderer.height / 2 + 280
     @container.pivot.set(target.x, target.y)
 
     # rotate towards target's rotation

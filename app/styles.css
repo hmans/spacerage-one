@@ -2,14 +2,11 @@ body {
   background-color: #333;
   margin: 0;
   padding: 0;
-  padding-top: 50vh;
 }
 
 canvas {
   display: block;
-  width: 800px;
-  height: 600px;
-  margin-top: -300px;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
 }

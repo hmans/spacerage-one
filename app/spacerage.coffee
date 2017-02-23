@@ -13,7 +13,7 @@ lag = 0
 module.exports = SpaceRage =
   start: ->
     # Set up PIXI app
-    app = new PIXI.Application(800, 600)
+    app = new PIXI.Application(1600, 900)
     document.body.appendChild app.view
     window.app = app
 
