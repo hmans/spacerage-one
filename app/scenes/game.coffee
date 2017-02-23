@@ -82,6 +82,7 @@ module.exports = class GameScene extends PIXI.Container
 
     @debug.text = "moo"
 
+    @joystick.update()
     @camera.lookAt(@ship)
     @ship.update()
     @background.update()
@@ -138,25 +139,16 @@ module.exports = class GameScene extends PIXI.Container
     @explosions.update()
 
   handleInput: ->
-    if @joystick.up()
-      @ship.accelerateForward(0.8)
+    @ship.accelerateForward(0.8 * @joystick.y)
+    @ship.accelerateRotation(0.005 * @joystick.x)
 
-    if @joystick.down()
-      @ship.accelerateForward(-0.5)
-
-    if @joystick.left()
-      @ship.accelerateRotation(-0.005)
-
-    if @joystick.right()
-      @ship.accelerateRotation(0.005)
-
-    if (key.isPressed("space"))
+    if @joystick.keyIsPressed("space")
       @fireTimer.cooldown 100, =>
         @fireSound.play()
         @bullets.addChild @makeBullet(-43, -4)
         @bullets.addChild @makeBullet(43, -4)
 
-    if (key.isPressed("e"))
+    if @joystick.keyIsPressed("e")
       @spawnEnemy()
 
   makeBullet: (offsetX = 0, offsetY = 0) ->
