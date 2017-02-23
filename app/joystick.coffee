@@ -53,20 +53,12 @@ class Joystick
     if @stick?
       @x = @stick.x
       @y = @stick.y
-
-    # Check keyboard input
-    if @up()
-      @y += 1
-
-    if @down()
-      @y -= 1
-
-    if @right()
-      @x += 1
-
-    if @left()
-      @x -= 1
-
+    else
+      # Check keyboard input
+      @y += 1 if @up()
+      @y -= 1 if @down()
+      @x += 1 if @right()
+      @x -= 1 if @left()
 
 
 module.exports = Joystick
