@@ -12,12 +12,12 @@ class Explosion extends PIXI.Container
 
     newSplosion = =>
       pos = Vec2.up.rotate(Util.rand(Math.PI * 2)).scale(Util.rand(20, 50))
-      @addChild @makeSplosion(pos, 5 + Math.random() * 40, 0.5 + Math.random() * 0.5)
+      @addChild @makeSplosion(pos, Util.rand(5, 45), Util.rand(0.5, 1))
 
-    num = Math.floor(2 + Math.random() * 10)
+    num = Util.randInt(2, 12)
 
     for i in [1..num]
-      setTimeout newSplosion, Math.random() * 300
+      setTimeout newSplosion, Util.rand(300)
 
     new TWEEN.Tween(@)
       .delay(500)
@@ -32,7 +32,7 @@ class Explosion extends PIXI.Container
     s.beginFill(color, alpha - 0.2)
     s.drawCircle(pos.x, pos.y, radius)
     s.beginFill(color, alpha)
-    s.drawCircle(pos.x * (0.8 + Math.random() * 0.4), pos.y * (0.8 + Math.random() * 0.4), radius * 0.8)
+    s.drawCircle(pos.x * Util.rand(0.8, 1.2), pos.y * Util.rand(0.8, 1.2), radius * 0.8)
     s._scale = 1
 
     targetPos = pos.scale(1.6)
