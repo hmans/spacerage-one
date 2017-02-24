@@ -145,7 +145,7 @@ module.exports = class GameScene extends PIXI.Container
 
           if @ship.isAlive()
             # remove some health
-            @ship.takeDamage(250)
+            @ship.takeDamage(100)
             @playerDied() if @ship.isDead()
 
     # update explosions
