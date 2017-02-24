@@ -153,6 +153,7 @@ module.exports = class GameScene extends PIXI.Container
 
   makeBullet: (offsetX = 0, offsetY = 0) ->
     bullet = new Bullet
+    bullet.scale.set 1.3
     bullet.position = new Vec2(@ship.x, @ship.y).add(new Vec2(offsetX, offsetY).rotate(@ship.rotation))
     bullet.rotation = @ship.rotation
     bullet.accelerateForward(20)
