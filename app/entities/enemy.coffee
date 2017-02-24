@@ -7,7 +7,6 @@ class Enemy extends PIXI.Sprite
   constructor: (@target, @fireFn) ->
     super(PIXI.Texture.fromImage("/img/enemy.png"))
     @anchor.set(0.5)
-    @scale.set(0.7)
 
     @fireTimer = new Timer
 
@@ -23,7 +22,7 @@ class Enemy extends PIXI.Sprite
     angle = targetVec.angleTo(lookVec)
 
     # stupid pseudo-3d rotation effect
-    @scale.x = 0.7 - Math.abs(@angularVelocity * 3)
+    @scale.x = @scale.y - Math.abs(@angularVelocity * 5)
 
     if angle > 0.2
       @accelerateRotation +0.002

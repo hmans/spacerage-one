@@ -145,8 +145,8 @@ module.exports = class GameScene extends PIXI.Container
     if @joystick.fire()
       @fireTimer.cooldown 100, =>
         @fireSound.play()
-        @bullets.addChild @makeBullet(-43, -4)
-        @bullets.addChild @makeBullet(43, -4)
+        @bullets.addChild @makeBullet(-72, -10)
+        @bullets.addChild @makeBullet(72, -10)
 
     if @joystick.keyIsPressed("e")
       @spawnEnemy()

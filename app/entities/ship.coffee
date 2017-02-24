@@ -10,7 +10,6 @@ class Ship extends PIXI.Sprite
     texture = PIXI.Texture.fromImage "/img/ship.png"
     super(texture)
 
-    @scale.set 0.6
     @anchor.set 0.5
 
     CanUpdate(@)
