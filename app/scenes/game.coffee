@@ -18,6 +18,8 @@ module.exports = class GameScene extends PIXI.Container
   constructor: ->
     super()
 
+    @state = "playing"
+
     # load sounds
     @fireSound = new Howl
       src: ['/sounds/laser.wav']
@@ -150,7 +152,7 @@ module.exports = class GameScene extends PIXI.Container
     @explosions.update()
 
   handleInput: ->
-    if @ship.isAlive()
+    if @state == "playing"
       @ship.accelerateForward(0.8 * @joystick.y)
       @ship.accelerateRotation(0.005 * @joystick.x)
 
@@ -160,8 +162,8 @@ module.exports = class GameScene extends PIXI.Container
           @bullets.addChild @makeBullet(-72, -10)
           @bullets.addChild @makeBullet(72, -10)
 
-    if @joystick.keyIsPressed("e")
-      @spawnEnemy()
+      if @joystick.keyIsPressed("e")
+        @spawnEnemy()
 
   makeBullet: (offsetX = 0, offsetY = 0) ->
     bullet = new Bullet
@@ -204,6 +206,7 @@ module.exports = class GameScene extends PIXI.Container
     @enemyBullets.addChild bullet
 
   playerDied: ->
+    @state = "deathanim"
     @ship.visible = false
 
     # EXPLOSION!
@@ -243,6 +246,8 @@ module.exports = class GameScene extends PIXI.Container
     new TWEEN.Tween(@message)
       .to({alpha: 1, rotation: Util.rand(-0.3, 0.3)}, duration)
       .easing(TWEEN.Easing.Quintic.In)
+      .onComplete =>
+        @state = "done"
       .start()
 
 
