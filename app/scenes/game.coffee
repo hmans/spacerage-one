@@ -165,6 +165,11 @@ module.exports = class GameScene extends PIXI.Container
       if @joystick.keyIsPressed("e")
         @spawnEnemy()
 
+    else if @state == "done"
+      if @joystick.fire()
+        # XXX: hook up some events
+        SpaceRage.startScene(new GameScene())
+
   makeBullet: (offsetX = 0, offsetY = 0) ->
     bullet = new Bullet
     bullet.scale.set 1.3
@@ -208,6 +213,8 @@ module.exports = class GameScene extends PIXI.Container
   playerDied: ->
     @state = "deathanim"
     @ship.visible = false
+
+    @music.stop()
 
     # EXPLOSION!
     explosion = new Explosion()
