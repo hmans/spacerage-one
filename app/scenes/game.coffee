@@ -253,9 +253,28 @@ module.exports = class GameScene extends PIXI.Container
     new TWEEN.Tween(@message)
       .to({alpha: 1, rotation: Util.rand(-0.3, 0.3)}, duration)
       .easing(TWEEN.Easing.Quintic.In)
-      .onComplete =>
-        @state = "done"
       .start()
 
+    setTimeout @waitForRestart, 2000
 
     @addChild @message
+
+  waitForRestart: =>
+    @state = "done"
+
+    text = new PIXI.Text "PRESS RAGE TO RESTART",
+      fontFamily: 'Arial Black'
+      fontSize: 40
+      fill: 0xFFFFFF
+
+    text.alpha = 0
+    text.pivot.set(text.width / 2, text.height / 2)
+    text.x = 800
+    text.y = 800
+
+    @addChild text
+
+    new TWEEN.Tween(text)
+      .to({alpha: 1}, 1000)
+      .easing(TWEEN.Easing.Quadratic.Out)
+      .start()
