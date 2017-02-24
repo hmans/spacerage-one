@@ -1,4 +1,4 @@
-SpaceRage = require "./spacerage.coffee"
+window.SpaceRage = require "./spacerage.coffee"
 
 document.addEventListener 'DOMContentLoaded', ->
   SpaceRage.start()

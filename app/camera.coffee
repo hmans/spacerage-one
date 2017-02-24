@@ -3,12 +3,12 @@ module.exports = class Camera
 
   lookAt: (target) ->
     if window.location.hash == '#nosickness'
-      @container.x = app.renderer.width / 2
-      @container.y = app.renderer.height / 2
+      @container.x = SpaceRage.renderer.width / 2
+      @container.y = SpaceRage.renderer.height / 2
       @container.pivot.set(target.x, target.y)
     else
-      @container.x = app.renderer.width / 2
-      @container.y = app.renderer.height / 2 + 280
+      @container.x = SpaceRage.renderer.width / 2
+      @container.y = SpaceRage.renderer.height / 2 + 280
       @container.pivot.set(target.x, target.y)
 
       # rotate towards target's rotation

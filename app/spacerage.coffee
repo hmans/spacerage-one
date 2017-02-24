@@ -12,10 +12,9 @@ lag = 0
 
 module.exports = SpaceRage =
   start: ->
-    # Set up PIXI app
-    app = new PIXI.Application(1600, 900)
-    document.body.appendChild app.view
-    window.app = app
+    @renderer = PIXI.autoDetectRenderer(1600, 900);
+    @stage = new PIXI.Container
+    document.body.appendChild @renderer.view
 
     # load assets
     loader = PIXI.loader
@@ -39,10 +38,14 @@ module.exports = SpaceRage =
       @scene?.update()
       lag = lag - frameDuration
 
+    # render the stage
+    @renderer.render @stage
+
+
 
   startScene: (scene) ->
     if @scene
-      app.stage.removeChild(@scene)
+      @stage.removeChild(@scene)
 
     @scene = scene
-    app.stage.addChild(@scene)
+    @stage.addChild(@scene)
