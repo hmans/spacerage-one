@@ -32,7 +32,7 @@ module.exports = class GameScene extends PIXI.Container
     # start stupid music
     @music = new Howl
       src: ['/sounds/theme.mp3']
-      # autoplay: true
+      autoplay: true
       loop: true
       volume: 1
 
