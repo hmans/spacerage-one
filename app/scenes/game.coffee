@@ -138,26 +138,27 @@ module.exports = class GameScene extends PIXI.Container
           @ship.velocity = @ship.velocity.add(bullet.velocity.scale(0.2))
           @ship.accelerateRotation(Util.rand(-0.01, 0.01))
 
-          # remove some health
-          @ship.health -= 25
-
           # remove bullet
           @enemyBullets.removeChildAt(i)
 
-
+          if @ship.isAlive()
+            # remove some health
+            @ship.takeDamage(250)
+            @playerDied() if @ship.isDead()
 
     # update explosions
     @explosions.update()
 
   handleInput: ->
-    @ship.accelerateForward(0.8 * @joystick.y)
-    @ship.accelerateRotation(0.005 * @joystick.x)
+    if @ship.isAlive()
+      @ship.accelerateForward(0.8 * @joystick.y)
+      @ship.accelerateRotation(0.005 * @joystick.x)
 
-    if @joystick.fire()
-      @fireTimer.cooldown 100, =>
-        @fireSound.play()
-        @bullets.addChild @makeBullet(-72, -10)
-        @bullets.addChild @makeBullet(72, -10)
+      if @joystick.fire()
+        @fireTimer.cooldown 100, =>
+          @fireSound.play()
+          @bullets.addChild @makeBullet(-72, -10)
+          @bullets.addChild @makeBullet(72, -10)
 
     if @joystick.keyIsPressed("e")
       @spawnEnemy()
@@ -201,3 +202,48 @@ module.exports = class GameScene extends PIXI.Container
     bullet.accelerateForward(10)
 
     @enemyBullets.addChild bullet
+
+  playerDied: ->
+    @ship.visible = false
+
+    # EXPLOSION!
+    explosion = new Explosion()
+    explosion.scale.set(5)
+    explosion.position = @ship.position
+    @explosions.addChild(explosion)
+    @explosionSound.play()
+
+    # DEATH TEXT!
+    @message = new PIXI.Graphics
+
+    text = new PIXI.Text "UR DEAD. SAD!",
+      fontFamily: 'Arial Black'
+      fontSize: 80
+      fill: 0xFF0000
+
+    @message
+      .beginFill 0xFFFFFF
+      .drawRect -100, -20, text.width + 200, text.height + 40
+      .addChild text
+
+    @message.pivot.set(text.width / 2, text.height / 2)
+    @message.x = 800
+    @message.y = 450
+    @message.scale.set(20)
+    @message.alpha = 0
+    @message.rotation = Util.rand(-0.3, 0.3)
+
+    duration = 1500
+
+    new TWEEN.Tween(@message.scale)
+      .to({ x: 1.5, y: 1.5}, duration)
+      .easing(TWEEN.Easing.Quintic.In)
+      .start()
+
+    new TWEEN.Tween(@message)
+      .to({alpha: 1, rotation: Util.rand(-0.3, 0.3)}, duration)
+      .easing(TWEEN.Easing.Quintic.In)
+      .start()
+
+
+    @addChild @message

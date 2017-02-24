@@ -21,6 +21,16 @@ class Ship extends PIXI.Sprite
     # game data
     @health = @maxHealth
 
+  takeDamage: (amount) ->
+    @health -= amount
+    @health = Math.max(0, @health)
+
+  isAlive: ->
+    @health > 0
+
+  isDead: ->
+    not @isAlive()
+
   healthFactor: ->
     @health / @maxHealth
 
