@@ -6,6 +6,7 @@ Vec2 = require "../vec2"
 Background = require "../entities/background"
 Ship = require "../entities/ship"
 Enemy = require "../entities/enemy"
+Bullet = require "../entities/bullet"
 Explosion = require "../entities/explosion"
 Explosions = require "../entities/explosions"
 HasVelocity = require "../components/has_velocity"
@@ -151,25 +152,10 @@ module.exports = class GameScene extends PIXI.Container
       @spawnEnemy()
 
   makeBullet: (offsetX = 0, offsetY = 0) ->
-    bullet = new PIXI.Graphics
-    bullet.beginFill(0xFFFFFF, 0.1);
-    bullet.drawCircle(0, 0, 15);
-    bullet.beginFill(0xFFFFFF, 0.4);
-    bullet.drawCircle(0, 0, 8);
-    bullet.beginFill(0xFFFFFF, 1);
-    bullet.drawCircle(0, 0, 5);
-
-    # set up initial position and movement
-    CanUpdate(bullet)
-    HasVelocity(bullet)
+    bullet = new Bullet
     bullet.position = new Vec2(@ship.x, @ship.y).add(new Vec2(offsetX, offsetY).rotate(@ship.rotation))
     bullet.rotation = @ship.rotation
-    bullet.drag = 1
     bullet.accelerateForward(20)
-
-    # set up ticker to remove bullet
-    bullet.created = Date.now()
-
     bullet
 
 
@@ -197,23 +183,9 @@ module.exports = class GameScene extends PIXI.Container
     enemy
 
   fireEnemyBullet: (enemy) =>
-    # @fireSound.play()
-
-    bullet = new PIXI.Graphics
-    bullet.beginFill(0xFF0000, 0.5);
-    bullet.drawCircle(0, 0, 6);
-    bullet.beginFill(0xFF0000, 1);
-    bullet.drawCircle(0, 0, 3);
-
-    # set up initial position and movement
-    CanUpdate(bullet)
-    HasVelocity(bullet)
+    bullet = new Bullet(0xFF0000)
     bullet.position = new Vec2(enemy.x, enemy.y)
     bullet.rotation = enemy.rotation
-    bullet.drag = 1
     bullet.accelerateForward(10)
-
-    # set up ticker to remove bullet
-    bullet.created = Date.now()
 
     @enemyBullets.addChild bullet
