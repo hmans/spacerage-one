@@ -5,6 +5,7 @@ Util = require "../util"
 Vec2 = require "../vec2"
 Background = require "../entities/background"
 Ship = require "../entities/ship"
+HUD = require "../entities/hud"
 Enemy = require "../entities/enemy"
 Bullet = require "../entities/bullet"
 Explosion = require "../entities/explosion"
@@ -29,7 +30,7 @@ module.exports = class GameScene extends PIXI.Container
     # start stupid music
     @music = new Howl
       src: ['/sounds/theme.mp3']
-      autoplay: true
+      # autoplay: true
       loop: true
       volume: 1
 
@@ -59,6 +60,9 @@ module.exports = class GameScene extends PIXI.Container
     @debug.x = 10
     @debug.y = 10
 
+    # set up HUD
+    @hud = new HUD(@)
+
     # Add entities to our world stage
     @world.addChild @background
     @world.addChild @ship
@@ -66,7 +70,10 @@ module.exports = class GameScene extends PIXI.Container
     @world.addChild @enemyBullets
     @world.addChild @enemies
     @world.addChild @explosions
-    @addChild @debug
+
+    # Add some extra entities that live outside of the world
+    @addChild @hud
+    # @addChild @debug
 
     # Start enemy spawner
     @scheduleSpawnEnemy()
@@ -86,6 +93,7 @@ module.exports = class GameScene extends PIXI.Container
     @camera.lookAt(@ship)
     @ship.update()
     @background.update()
+    @hud.update()
 
     @handleInput()
 
@@ -125,10 +133,13 @@ module.exports = class GameScene extends PIXI.Container
         bullet.update()
 
         distance = new Vec2(@ship.x, @ship.y).distance(bullet)
-        if distance < 50
+        if distance < 80
           # apply a bit of impact to the player ship
           @ship.velocity = @ship.velocity.add(bullet.velocity.scale(0.2))
           @ship.accelerateRotation(Util.rand(-0.01, 0.01))
+
+          # remove some health
+          @ship.health -= 25
 
           # remove bullet
           @enemyBullets.removeChildAt(i)
