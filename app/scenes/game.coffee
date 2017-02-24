@@ -162,8 +162,11 @@ module.exports = class GameScene extends PIXI.Container
           @bullets.addChild @makeBullet(-72, -10)
           @bullets.addChild @makeBullet(72, -10)
 
-      if @joystick.keyIsPressed("e")
+      # "cheats"
+      if @joystick.keyIsPressed("9")
         @spawnEnemy()
+      if @joystick.keyIsPressed("0")
+        @playerDied()
 
     else if @state == "done"
       if @joystick.fire()
@@ -211,6 +214,7 @@ module.exports = class GameScene extends PIXI.Container
     @enemyBullets.addChild bullet
 
   playerDied: ->
+    @ship.health = 0
     @state = "deathanim"
     @ship.visible = false
 
@@ -227,8 +231,9 @@ module.exports = class GameScene extends PIXI.Container
     @message = new PIXI.Graphics
 
     text = new PIXI.Text "UR DEAD. SAD!",
-      fontFamily: 'Arial Black'
+      fontFamily: 'Arial'
       fontSize: 80
+      fontWeight: "bold"
       fill: 0xFF0000
 
     @message
@@ -263,8 +268,9 @@ module.exports = class GameScene extends PIXI.Container
     @state = "done"
 
     text = new PIXI.Text "PRESS RAGE TO RESTART",
-      fontFamily: 'Arial Black'
+      fontFamily: 'Arial'
       fontSize: 40
+      fontWeight: "bold"
       fill: 0xFFFFFF
 
     text.alpha = 0
