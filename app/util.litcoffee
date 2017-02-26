@@ -58,6 +58,14 @@ Returns a random angle (ie. a random value between `0` and `Math.PI * 2`.)
       Util.rand(max)
 
 
+### Util.sample
+
+Picks a random element from a given array.
+
+    Util.sample = (list) ->
+      list[Util.randInt(list.length)]
+
+
 ## That's all.
 
 Let's export it!
