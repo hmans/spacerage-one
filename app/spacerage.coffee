@@ -5,6 +5,7 @@ require "howler"
 window.TWEEN = require "tween.js"
 
 GameScene = require "./scenes/game"
+TestScene = require "./scenes/test"
 
 frameDuration = 1000 / 60
 start = Date.now()
@@ -12,7 +13,7 @@ lag = 0
 
 module.exports = SpaceRage =
   start: ->
-    @renderer = PIXI.autoDetectRenderer(1600, 900);
+    @renderer = PIXI.autoDetectRenderer(1600, 900, antialias: false)
     @stage = new PIXI.Container
     document.body.appendChild @renderer.view
 
@@ -21,7 +22,8 @@ module.exports = SpaceRage =
     loader.add "ship", "/img/ship.png"
     loader.add "background", "/img/space.jpg"
     loader.load =>
-      @startScene(new GameScene())
+      # @startScene(new GameScene())
+      @startScene new TestScene
       requestAnimationFrame @gameLoop.bind(@)
 
   gameLoop: ->

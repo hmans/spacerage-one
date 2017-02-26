@@ -1,4 +1,5 @@
-Scene = ->
+class Scene extends PIXI.Container
+  update: (f) ->
 
 
 
