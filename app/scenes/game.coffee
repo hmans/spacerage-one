@@ -13,6 +13,24 @@ Explosions = require "../entities/explosions"
 HasVelocity = require "../components/has_velocity"
 CanUpdate = require "../components/can_update"
 
+deathTexts = [
+  "UR DEAD. SAD!",
+  "YOU DIED. AGAIN.",
+  "YOU EXPLODIED",
+  "RAGE OVER",
+  "LOL DEAD",
+  "YOU SUCK",
+  "OMFG WHAT",
+  "DEAD AGAIN",
+  "ALIVE NO MORE",
+  "RAGE AGAIN?",
+  "WHY",
+  "NOOOOOOOOOO",
+  "WELL...",
+  "YOU'RE NO GOOD",
+  "GET RAGE"
+]
+
 
 module.exports = class GameScene extends PIXI.Container
   constructor: ->
@@ -230,7 +248,7 @@ module.exports = class GameScene extends PIXI.Container
     # DEATH TEXT!
     @message = new PIXI.Graphics
 
-    text = new PIXI.Text "UR DEAD. SAD!",
+    text = new PIXI.Text Util.sample(deathTexts),
       fontFamily: 'Arial'
       fontSize: 80
       fontWeight: "bold"
