@@ -62,7 +62,7 @@ module.exports = class GameScene extends PIXI.Container
     @addChild @world
 
     # set up some tools
-    @camera = new Camera(@world)
+    @camera = new Camera
     @joystick = new Joystick(@)
 
     # set up entities
@@ -84,6 +84,7 @@ module.exports = class GameScene extends PIXI.Container
     @hud = new HUD(@)
 
     # Add entities to our world stage
+    @world.addChild @camera
     @world.addChild @background
     @world.addChild @ship
     @world.addChild @bullets
@@ -110,7 +111,8 @@ module.exports = class GameScene extends PIXI.Container
     now = Date.now()
 
     @joystick.update()
-    @camera.lookAt(@ship)
+    @camera.lookAt @ship
+    @camera.update()
     @ship.update()
     @background.update()
     @hud.update()

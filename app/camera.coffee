@@ -1,15 +1,11 @@
-module.exports = class Camera
-  constructor: (@container) ->
+module.exports = class Camera extends PIXI.DisplayObject
+  constructor: ->
+    super()
 
   lookAt: (target) ->
-    if window.location.hash == '#nosickness'
-      @container.x = SpaceRage.renderer.width / 2
-      @container.y = SpaceRage.renderer.height / 2
-      @container.pivot.set(target.x, target.y)
-    else
-      @container.x = SpaceRage.renderer.width / 2
-      @container.y = SpaceRage.renderer.height / 2 + 280
-      @container.pivot.set(target.x, target.y)
+    @position = target.position
 
-      # rotate towards target's rotation
-      @container.rotation = - target.rotation
+  update: ->
+    @parent.pivot.set(@x, @y)
+    @parent.x = SpaceRage.renderer.width / 2
+    @parent.y = SpaceRage.renderer.height / 2
