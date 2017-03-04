@@ -27,6 +27,15 @@ class Ship extends PIXI.Sprite
 
     @updateMethods.push @rechargeShield
 
+    # add shield graphic
+    @shieldGfx = new PIXI.Graphics
+    @shieldGfx
+      .beginFill 0x8888FF, 0.3
+      .drawCircle 0, 0, 100
+    @shieldGfx.alpha = 0
+    @addChild @shieldGfx
+
+
     # game data
     @health = @maxHealth
     @shield = @maxShield
@@ -34,6 +43,7 @@ class Ship extends PIXI.Sprite
 
   takeDamage: (amount) ->
     @lastHitTime = Date.now()
+
     @shield -= amount
 
     if @shield < 0

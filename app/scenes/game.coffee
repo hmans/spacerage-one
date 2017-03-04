@@ -156,9 +156,17 @@ module.exports = class GameScene extends PIXI.Container
 
         distance = new Vec2(@ship.x, @ship.y).distance(bullet)
         if distance < 80
-          # apply a bit of impact to the player ship
-          @ship.velocity = @ship.velocity.add(bullet.velocity.scale(0.2))
-          @ship.accelerateRotation(Util.rand(-0.01, 0.01))
+          # animate shield
+          if @ship.shield > 0
+            @ship.shieldGfx.alpha = 1
+            new TWEEN.Tween @ship.shieldGfx
+              .to {alpha: 0}, 1000
+              .easing TWEEN.Easing.Quadratic.Out
+              .start()
+          else
+            # apply a bit of impact to the player ship
+            @ship.velocity = @ship.velocity.add(bullet.velocity.scale(0.4))
+            @ship.accelerateRotation(Util.rand(-0.03, 0.03))
 
           # remove bullet
           @enemyBullets.removeChildAt(i)
