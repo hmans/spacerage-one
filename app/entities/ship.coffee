@@ -59,7 +59,7 @@ class Ship extends PIXI.Sprite
     not @isAlive()
 
   rechargeShield: =>
-    if Date.now() > @lastHitTime + @shieldRechargeDelay
+    if @isAlive() && Date.now() > @lastHitTime + @shieldRechargeDelay
       @shield = Math.min(@shield + @shieldRechargeAmount, @maxShield)
 
   healthFactor: ->
