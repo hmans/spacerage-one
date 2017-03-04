@@ -262,8 +262,8 @@ module.exports = class GameScene extends PIXI.Container
       .addChild text
 
     @message.pivot.set(text.width / 2, text.height / 2)
-    @message.x = 800
-    @message.y = 450
+    @message.x = SpaceRage.width / 2
+    @message.y = SpaceRage.height / 2
     @message.scale.set(20)
     @message.alpha = 0
     @message.rotation = Util.rand(-0.3, 0.3)
@@ -295,8 +295,8 @@ module.exports = class GameScene extends PIXI.Container
 
     text.alpha = 0
     text.pivot.set(text.width / 2, text.height / 2)
-    text.x = 800
-    text.y = 800
+    text.x = SpaceRage.width / 2
+    text.y = SpaceRage.height - 60
 
     @addChild text
 
