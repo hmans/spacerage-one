@@ -126,7 +126,7 @@ module.exports = class GameScene extends PIXI.Container
     # update bullets
     for bullet, i in @bullets.children by -1
       # check bullet lifetime
-      if now > bullet.created + 1000
+      if now > bullet.created + 2000
         @bullets.removeChildAt(i)
       else
         bullet.update()
