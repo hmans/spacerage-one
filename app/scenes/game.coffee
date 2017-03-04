@@ -173,8 +173,8 @@ module.exports = class GameScene extends PIXI.Container
 
   handleInput: ->
     if @state == "playing"
-      @ship.accelerateForward(0.8 * @joystick.y)
-      @ship.accelerateRotation(0.005 * @joystick.x)
+      @ship.accelerateForward(0.6 * @joystick.y)
+      @ship.accelerateRotation(0.002 * @joystick.x)
 
       if @joystick.fire()
         @fireTimer.cooldown 100, =>

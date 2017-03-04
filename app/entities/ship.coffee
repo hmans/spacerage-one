@@ -21,6 +21,10 @@ class Ship extends PIXI.Sprite
     HasVelocity(@)
     HasStupidSkewTrick(@)
 
+    @drag = 0.97
+    @angularDrag = 0.97
+
+
     @updateMethods.push @rechargeShield
 
     # game data
