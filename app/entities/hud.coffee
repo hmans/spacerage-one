@@ -1,24 +1,15 @@
-class HUD extends PIXI.Container
-  healthbarSize: { x: 430, y: 50 }
+Bar = require "../bar"
 
+class HUD extends PIXI.Container
   constructor: (@scene) ->
     super()
-
-    @healthbar = new PIXI.Graphics
-
-    @addChild @healthbar
-
+    @healthBar = new Bar(430, 50, 0xFF0000)
+    @addChild @healthBar
+    @healthBar.x = SpaceRage.width - 450
+    @healthBar.y = 20
 
   update: =>
-    threshold = @scene.ship.healthFactor() * @healthbarSize.x
-
-    @healthbar.clear()
-      .beginFill 0xFF0000, 0.8
-      .drawRect SpaceRage.width - 450, 20, threshold, @healthbarSize.y
-      .beginFill 0xFFFFFF, 0.2
-      .drawRect SpaceRage.width - 450 + threshold, 20, @healthbarSize.x - threshold, @healthbarSize.y
-
-
-
+    @healthBar.value = @scene.ship.healthFactor()
+    @healthBar.update()
 
 module.exports = HUD
