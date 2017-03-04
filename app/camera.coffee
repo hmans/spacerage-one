@@ -14,6 +14,6 @@ module.exports = class Camera extends PIXI.DisplayObject
 
   applyToParent: ->
     @parent.pivot.set(@x, @y)
-    @parent.x = SpaceRage.renderer.width / 2 + @offset.x
-    @parent.y = SpaceRage.renderer.height / 2 + @offset.y
+    @parent.x = SpaceRage.width / 2 + @offset.x
+    @parent.y = SpaceRage.height / 2 + @offset.y
     @parent.rotation = -@rotation
