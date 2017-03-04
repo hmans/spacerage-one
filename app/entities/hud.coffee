@@ -1,5 +1,5 @@
 class HUD extends PIXI.Container
-  healthbarSize: { x: 700, y: 50 }
+  healthbarSize: { x: 430, y: 50 }
 
   constructor: (@scene) ->
     super()
@@ -14,9 +14,9 @@ class HUD extends PIXI.Container
 
     @healthbar.clear()
       .beginFill 0xFF0000, 0.8
-      .drawRect 880, 20, threshold, @healthbarSize.y
+      .drawRect SpaceRage.width - 450, 20, threshold, @healthbarSize.y
       .beginFill 0xFFFFFF, 0.2
-      .drawRect 880 + threshold, 20, @healthbarSize.x - threshold, @healthbarSize.y
+      .drawRect SpaceRage.width - 450 + threshold, 20, @healthbarSize.x - threshold, @healthbarSize.y
 
 
 
