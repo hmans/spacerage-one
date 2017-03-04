@@ -17,6 +17,7 @@ class HUD extends PIXI.Container
   update: =>
     @healthBar.value = @scene.ship.healthFactor()
     @healthBar.update()
+    @shieldBar.value = @scene.ship.shieldFactor()
     @shieldBar.update()
 
 module.exports = HUD

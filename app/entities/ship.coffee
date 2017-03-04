@@ -7,6 +7,7 @@ HasStupidSkewTrick = (obj) ->
 
 class Ship extends PIXI.Sprite
   maxHealth: 1000
+  maxShield: 1000
 
   constructor: ->
     texture = PIXI.Texture.fromImage "/img/ship.png"
@@ -20,9 +21,15 @@ class Ship extends PIXI.Sprite
 
     # game data
     @health = @maxHealth
+    @shield = @maxShield
 
   takeDamage: (amount) ->
-    @health -= amount
+    @shield -= amount
+
+    if @shield < 0
+      @health += @shield
+      @shield = 0
+
     @health = Math.max(0, @health)
 
   isAlive: ->
@@ -33,5 +40,8 @@ class Ship extends PIXI.Sprite
 
   healthFactor: ->
     @health / @maxHealth
+
+  shieldFactor: ->
+    @shield / @maxShield
 
 module.exports = Ship
