@@ -6,8 +6,8 @@ HasStupidSkewTrick = (obj) ->
     obj.skew.set(obj.angularVelocity / 4)
 
 class Ship extends PIXI.Sprite
-  maxHealth: 1000
-  maxShield: 1000
+  maxHealth: 2000
+  maxShield: 2000
 
   constructor: ->
     texture = PIXI.Texture.fromImage "/img/ship.png"
