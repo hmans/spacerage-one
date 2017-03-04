@@ -12,9 +12,14 @@ lag = 0
 
 module.exports = SpaceRage =
   start: ->
-    @renderer = PIXI.autoDetectRenderer(1600, 900);
+    # Set up renderer
+    @renderer = PIXI.autoDetectRenderer(500, 500)
     @stage = new PIXI.Container
     document.body.appendChild @renderer.view
+
+    # Set up automatic resizing
+    window.onresize = @resizeRenderer
+    @resizeRenderer()
 
     # load assets
     loader = PIXI.loader
@@ -23,6 +28,12 @@ module.exports = SpaceRage =
     loader.load =>
       @startScene(new GameScene())
       requestAnimationFrame @gameLoop.bind(@)
+
+  resizeRenderer: =>
+    width  = window.innerWidth
+    height = window.innerHeight
+    SpaceRage.renderer.resize width, height
+
 
   gameLoop: ->
     requestAnimationFrame @gameLoop.bind(@)
