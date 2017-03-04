@@ -9,7 +9,7 @@ class Ship extends PIXI.Sprite
   maxHealth: 1200
   maxShield: 1200
   shieldRechargeDelay: 2000
-  shieldRechargeAmount: 5
+  shieldRechargeAmount: 12
 
   constructor: ->
     texture = PIXI.Texture.fromImage "/img/ship.png"
