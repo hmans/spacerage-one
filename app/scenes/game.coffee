@@ -76,7 +76,12 @@ module.exports = class GameScene extends PIXI.Container
     @explosions = new Explosions
 
     # set up debug text
-    @debug = new PIXI.Text("SPACERAGE! \\o/", {fontFamily : 'Arial', fontSize: 48, fill : 0xff1010, align : 'center'})
+    @debug = new PIXI.Text "SPACERAGE! \\o/",
+      fontFamily: 'Arial',
+      fontSize: 48,
+      fill: 0xff1010,
+      align: 'center'
+
     @debug.x = 10
     @debug.y = 10
 
