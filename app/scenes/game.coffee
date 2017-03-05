@@ -96,6 +96,9 @@ module.exports = class GameScene extends PIXI.Container
     @addChild @hud
     # @addChild @debug
 
+    # Connect entities through events
+    @ship.on 'death', @playerDied
+
     # Start enemy spawner
     @scheduleSpawnEnemy()
 
@@ -174,7 +177,6 @@ module.exports = class GameScene extends PIXI.Container
           if @ship.isAlive()
             # remove some health
             @ship.takeDamage(100)
-            @playerDied() if @ship.isDead()
 
     # update explosions
     @explosions.update()
@@ -241,7 +243,7 @@ module.exports = class GameScene extends PIXI.Container
 
     @enemyBullets.addChild bullet
 
-  playerDied: ->
+  playerDied: =>
     @ship.health = 0
     @state = "deathanim"
     @ship.visible = false

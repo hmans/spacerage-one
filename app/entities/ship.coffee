@@ -24,7 +24,6 @@ class Ship extends PIXI.Sprite
     @drag = 0.97
     @angularDrag = 0.97
 
-
     @updateMethods.push @rechargeShield
 
     # add shield graphic
@@ -34,7 +33,6 @@ class Ship extends PIXI.Sprite
       .drawCircle 0, 0, 100
     @shieldGfx.alpha = 0
     @addChild @shieldGfx
-
 
     # game data
     @health = @maxHealth
@@ -50,7 +48,9 @@ class Ship extends PIXI.Sprite
       @health += @shield
       @shield = 0
 
-    @health = Math.max(0, @health)
+    if @health <= 0
+      @health = 0
+      @emit 'death'
 
   isAlive: ->
     @health > 0
