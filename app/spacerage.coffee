@@ -1,4 +1,5 @@
 require "pixi.js"
+require "pixi-filters"
 require "keymaster"
 require "howler"
 
