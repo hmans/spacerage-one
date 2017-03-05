@@ -14,7 +14,7 @@
     "coffee-script": "^1.12.4",
     "keymaster": "^1.6.2",
     "pixi-filters": "^1.0.6",
-    "pixi.js": "^4.3.5",
+    "pixi.js": "^4.4.1",
     "tween.js": "^16.6.0"
   },
   "devDependencies": {

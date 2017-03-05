@@ -1558,9 +1558,9 @@ pixi-gl-core@^1.0.3:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/pixi-gl-core/-/pixi-gl-core-1.1.0.tgz#a52cb4dd3254f9c7857a0e9c2356b00e6ec0c761"
 
-pixi.js@^4.3.5:
-  version "4.3.5"
-  resolved "https://registry.yarnpkg.com/pixi.js/-/pixi.js-4.3.5.tgz#26fe02a9fe8d54b8a05b00dffd127e299b2f4670"
+pixi.js@^4.4.1:
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/pixi.js/-/pixi.js-4.4.1.tgz#b49f7fc5be4729d0405b5c7c048a2c806b395505"
   dependencies:
     bit-twiddle "^1.0.2"
     earcut "^2.0.7"
@@ -1568,7 +1568,7 @@ pixi.js@^4.3.5:
     ismobilejs "^0.4.0"
     object-assign "^4.0.1"
     pixi-gl-core "^1.0.3"
-    resource-loader "^2.0.4"
+    resource-loader "^2.0.6"
 
 preserve@^0.2.0:
   version "0.2.0"
@@ -1753,9 +1753,9 @@ resolve@1.1.7:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.1.7.tgz#203114d82ad2c5ed9e8e0411b3932875e889e97b"
 
-resource-loader@^2.0.4:
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/resource-loader/-/resource-loader-2.0.6.tgz#30961188a05d5e729fc452977e058712d0f34f44"
+resource-loader@^2.0.6:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/resource-loader/-/resource-loader-2.0.7.tgz#246324c53f78f747cfe575ed3bdc11cff79a2ff7"
   dependencies:
     mini-signals "^1.1.1"
     parse-uri "^1.0.0"
