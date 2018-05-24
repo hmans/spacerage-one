@@ -8,7 +8,7 @@
   "scripts": {
     "start": "brunch watch --server",
     "build": "brunch build --production",
-    "deploy": "rsync -vr --del public/* sunder:/var/www/spacerage/"
+    "deploy": "brunch build --production && netlify deploy"
   },
   "dependencies": {
     "coffee-script": "^1.12.4",
